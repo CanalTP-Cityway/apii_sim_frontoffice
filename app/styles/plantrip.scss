@@ -1,0 +1,280 @@
+//@import "bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss";
+//@import "bootstrap/dist/css/bootstrap.css";
+
+$gray-darker:  lighten(#000, 13.5%); // #222
+$gray-dark:    lighten(#000, 20%);   // #333
+$gray:         lighten(#000, 33.5%); // #555
+$gray-light:   lighten(#000, 46.7%); // #777
+$gray-lighter: lighten(#000, 93.5%); // #eee
+
+$brand-primary: #428bca;
+$brand-success: #5cb85c;
+$brand-info:    #5bc0de;
+$brand-warning: #f0ad4e;
+$brand-danger:  #d9534f;
+$table-bg-hover: #f5f5f5;
+$table-bg-accent: #f9f9f9;
+
+h1{ color: $brand-primary !important; }
+
+.selected {
+  background-color: $gray-lighter !important;
+  td {
+    background-color: $gray-lighter !important;
+  }
+}
+
+#detail-step:hover { background: $table-bg-hover; cursor: pointer;}
+
+.table-hover tbody tr:hover > td {
+  cursor: pointer;
+}
+
+a:hover{
+  cursor: pointer;
+}
+    
+.table {
+  display: table;
+}
+
+.table-row {
+  display: table-row;
+}
+
+.table-cell {
+  display: table-cell;
+}
+
+.label {
+  padding: 0.2em 0.6em 0.2em ;
+}
+
+#contact {
+  position: fixed;
+  right: -32px;
+  bottom: 100px;
+  padding: 10px 25px;
+  background: rgba(80,80,80,0.7);
+  color: #fff;
+  text-decoration: none;
+  -ms-transform: rotate(270deg);
+  -moz-transform: rotate(270deg);
+  -webkit-transform: rotate(270deg);
+  transform: rotate(270deg);
+  border-radius: 8px 8px 0 0;
+  z-index: 1001;
+}
+
+#popup {
+  text-align: center;
+  font-size: x-small;
+  
+  .popup-header {
+    color: white;
+    background-color: $brand-primary ;
+  }
+  .departure {
+    .glyphicon-flag {
+      color: green;
+    }
+  }
+   .arrival {
+    .glyphicon-flag {
+      color: red;
+    }
+  }
+}
+  
+#map{
+  position: absolute; 
+  top: 0px; 
+  left: 0px; 
+  min-height: 100%; 
+  height: 100%; 
+  width: 100%;
+  
+  .angular-leaflet-map {
+    width: 100%;
+    height: 100%;
+  }
+  
+  div.circle {
+    border: 1px solid black;
+    border-radius: 50%;
+    color: white;
+    display:inline-block;
+    text-align: center;
+    vertical-align: baseline;
+  }
+  
+  div.circle-0 {
+    background: rgba(255, 128, 0, 1);;
+  }
+  
+  div.circle-1 {
+    background: rgba(102, 178, 255, 1);;
+  }
+}
+
+#plantrip{
+  
+  width: 50ex;
+  
+  #departureTime {
+    margin-left: 10px;
+  }
+  
+  #arrivalDepartureDateTime{
+    vertical-align: middle; 
+    padding-right: 10px; 
+    padding-top: 4%;
+  }
+  
+  a:not(.collapsed) {
+   .btn {
+      background-color: $gray-lighter ;
+    }
+  }
+  
+  .table{
+    margin-bottom: 0px !important;
+  }
+  
+    #parameters{
+        margin-top: 0px; 
+        margin-bottom: 10px;            
+        .content{            
+            margin-left: 0px;
+        }
+    }    
+   
+}
+
+#responses{
+  position: absolute;
+  top: 15px; 
+  left: 10px;
+  .panel {
+      //[DSU]overflow: auto !important;
+      overflow: visible;
+  }
+}
+
+#solution{
+    
+    .panel-body {
+      
+        .searching { 
+            color: gray;        
+            span {
+                margin-left: 10px;
+            }
+        }
+        
+        .end_search{ 
+            color: $brand-success; 
+            
+            span{
+                margin-left: 10px;
+            }
+        }        
+        
+    }
+}
+
+#detail{
+    
+    overflow-y:auto;
+    max-height: 50ex;
+    
+    .steps{
+        width: 100%;
+    }
+    
+    .step{ 
+    
+  
+       .leg {
+        padding-left: 10px;
+       }
+     
+       .waiting{
+        padding-left: 10px;
+       }
+       .duration {
+       }
+     
+       .ptride {
+        padding-left: 10px;
+       }
+                            
+        &.stop_point{
+        
+        .table-cell{
+                    padding: 3px 0px 3px 0px;   
+
+        }
+
+            .departure_time{
+                text-align: center;
+                width: 6em;
+            }    
+        
+            .trip_picture{
+                text-align: center;
+            
+                .fa{
+                    display: inline-block;
+                 }
+            }
+            
+            .stop_point_name{
+                margin-left: 5px;
+            }
+            
+            td{
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+        }                   
+            
+        .elapsed_time{
+            color: $brand-primary;
+            font-size: 11px;           
+            text-align: center;
+            width: 7em;
+            vertical-align: middle;
+
+        }
+            
+        .disturbed_line{
+            color: $brand-warning;                      
+            text-align: center;
+        }
+         
+        .tad{
+            margin-left: 10px;
+        }            
+                    
+        .trip_link{
+            background-image: url("http://www.vianavigo.com/fileadmin/templates/STIF/images/way.transport.png"); background-repeat: repeat-y; 
+            background-position: center;    
+        }                  
+            
+        &.departure{
+                .icon-location{
+                  color: green;                        
+                }   
+        }
+
+        &.arrival{
+                .icon-location{
+                width: none;
+                        color: red;                        
+                }   
+        }            
+            
+    }
+}
+

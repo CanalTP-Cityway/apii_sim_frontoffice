@@ -1,0 +1,260 @@
+<div id="plantrip" ng-controller="PlantripCtrl">
+	<div class="clearfix">
+		<a data-toggle="collapse" data-parent="#parameters" href="#parameters"
+			class="collapsed"
+		>
+			<button type="submit" class="btn btn-default pull-right"
+				title="{{ parameters_tooltip | translate}}"
+			>
+				<i class="fa fa-cogs"></i>
+			</button>
+		</a>
+	</div>
+	<form name="plantripForm" novalidate role="form" class="container-fluid">
+		<div class="form-group row "
+			ng-class="{ 'has-error': hasError('Departure') && plantripForm.Departure.$dirty}"
+		>
+			<label class="control-label" for="Departure" translate>Departure</label>
+			<!-- 			<code>{{model.departure.lng |number:7}} / {{model.departure.lat -->
+			<!-- 				|number:7}}</code> -->
+			<div class="input-group">
+				<input style="display: inline-block;" id='Departure' type="text"
+					class="form-control" name="Departure"
+					placeholder="{{'EnterDeparture'| translate}} "
+					ng-model="$storage.departure"
+					typeahead="item.display_name for item in getAddresses($viewValue)"
+					typeahead-on-select="onSelectDeparture($item, $model, $label)" required
+				/>
+				<span class="input-group-btn">
+					<button type="button" class="btn btn-default" ng-click="reverse()">
+						<i class="glyphicon glyphicon-sort"></i>
+					</button>
+				</span>
+			</div>
+			<span class="help-block" ng-show="hasError('Departure')">
+				{{errorMessage('Departure')}}</span>
+		</div>
+		<div class="form-group row"
+			ng-class="{ 'has-error': hasError('Arrival') && plantripForm.Arrival.$dirty}"
+		>
+			<label class="control-label" for="arrival" translate>Arrival</label>
+			<!-- 			<code>{{model.arrival.lng |number:7}} / {{model.arrival.lat -->
+			<!-- 				|number:7}}</code> -->
+			<div class="input-group">
+				<input id="Arrival" type="text" class="form-control" name="Arrival"
+					placeholder="{{'EnterArrival'| translate}}" ng-model="$storage.arrival"
+					typeahead="item.display_name for item in getAddresses($viewValue)"
+					typeahead-on-select="onSelectArrival($item, $model, $label)" required
+				/>
+				<span class="input-group-btn">
+					<button type="button" class="btn btn-default" ng-click="reverse()">
+						<i class="glyphicon glyphicon-sort"></i>
+					</button>
+				</span>
+			</div>
+			<span class="help-block" ng-show="hasError('Arrival')">
+				{{errorMessage('Arrival')}} </span>
+		</div>
+		<div class="form-group row">
+			<input type="radio" id="arrivalTime"
+				ng-model="$storage.arrivalDepartureTimeConstraint" value="true"
+			>
+			<label for="arrivalTime" translate>DepartureTimeConstraint</label>
+			<input type="radio" id="departureTime"
+				ng-model="$storage.arrivalDepartureTimeConstraint" value="false"
+			>
+			<label for="departureTime" translate>ArrivalTimeConstraint</label>
+		</div>
+		<div class="form-group row">
+			<div class="table">
+				<div class="table-row;">
+					<div id="arrivalDepartureDateTime" class="table-cell"
+						
+					>
+						<p class="input-group">
+							<input type="text" class="form-control"
+								ng-model="$storage.arrivalDepartureDate" datepicker-popup="dd/MM/yyyy"
+								is-open="opened" name="ArrivalDepartureTime"
+							/>
+							<span class="input-group-btn">
+								<button type="button" class="btn btn-default" ng-click="open($event)">
+									<i class="glyphicon glyphicon-calendar"></i>
+								</button>
+							</span>
+						</p>
+					</div>
+					<div class="table-cell">
+						<timepicker ng-model="$storage.arrivalDepartureTime" show-meridian=false />
+					</div>
+				</div>
+				<span class="help-block"
+					ng-show="hasError('ArrivalDepartureTime' , ['DepartureTime','ArrivalTime'])"
+				> {{errorMessage('ArrivalDepartureTime' ,
+					['DepartureTime','ArrivalTime'])}}</span>
+			</div>
+		</div>
+		<div id="parameters" class="panel panel-default panel-collapse collapse row">
+			<div class="panel-heading">
+				<h1 class="panel-title" translate>Parameters</h1>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<input id="accessibilityConstraint" type="checkbox"
+						ng-model="$storage.accessibilityConstraint"
+					>
+					<label for="accessibilityConstraint" translate>AccessibilityConstraint</label>
+				</div>
+				<div id="transportMode" class="form-group">
+					<div class="btn-group">
+						<button class="btn btn-default" translate>TransportMode</button>
+						<button data-toggle="dropdown" class="btn btn-default dropdown-toggle"
+							data-placeholder="false"
+						>
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu">
+							<li>
+								<input id="ALL" type="checkbox"
+									ng-checked="isItemSelected($storage.transportMode, 'ALL')"
+									ng-click="onTransportModeChange($storage.transportMode, 'ALL')"
+								>
+								<label for="ALL" translate>ALL</label>
+							</li>
+							</li>
+							<li>
+								<input id="BUS" type="checkbox"
+									ng-checked="isItemSelected($storage.transportMode, 'BUS')"
+									ng-click="onTransportModeChange($storage.transportMode, 'BUS')"
+								>
+								<label for="BUS" translate>BUS</label>
+							</li>
+							</li>
+							<li>
+								<input id="TRAM" type="checkbox"
+									ng-checked="isItemSelected($storage.transportMode, 'TRAM')"
+									ng-click="onTransportModeChange($storage.transportMode, 'TRAM')"
+								>
+								<label for="TRAM" translate>TRAM</label>
+							</li>
+							</li>
+							<li>
+								<input id="RAIL" type="checkbox"
+									ng-checked="isItemSelected($storage.transportMode, 'RAIL')"
+									ng-click="onTransportModeChange($storage.transportMode, 'RAIL')"
+								>
+								<label for="RAIL" translate>RAIL</label>
+							</li>
+							</li>
+							<li>
+								<input id="METRO" type="checkbox"
+									ng-checked="isItemSelected($storage.transportMode, 'METRO')"
+									ng-click="onTransportModeChange($storage.transportMode, 'METRO')"
+								>
+								<label for="METRO" translate>METRO</label>
+							</li>
+							</li>
+							<li>
+								<input id="AIR" type="checkbox"
+									ng-checked="isItemSelected($storage.transportMode, 'AIR')"
+									ng-click="onCheckBoxChange($storage.transportMode, 'AIR')"
+								>
+								<label for="AIR" translate>AIR</label>
+							</li>
+							</li>
+							<li>
+								<input id="WATER" type="checkbox"
+									ng-checked="isItemSelected($storage.transportMode, 'WATER')"
+									ng-click="onCheckBoxChange($storage.transportMode, 'WATER')"
+								>
+								<label for="WATER" translate>WATER</label>
+							</li>
+							</li>
+							<li>
+								<input id="CABLE" type="checkbox"
+									ng-checked="isItemSelected($storage.transportMode, 'CABLE')"
+									ng-click="onTransportModeChange($storage.transportMode, 'CABLE')"
+								>
+								<label for="CABLE" translate>CABLE</label>
+							</li>
+							</li>
+							<li>
+								<input id="TAXI" type="checkbox"
+									ng-checked="isItemSelected($storage.transportMode, 'TAXI')"
+									ng-click="onTransportModeChange($storage.transportMode, 'TAXI')"
+								>
+								<label for="TAXI" translate>TAXI</label>
+							</li>
+							</li>
+							<li>
+								<input id="BIKE" type="checkbox"
+									ng-checked="isItemSelected($storage.transportMode, 'BIKE')"
+									ng-click="onTransportModeChange($storage.transportMode, 'BIKE')"
+								>
+								<label for="BIKE" translate>BIKE</label>
+							</li>
+							</li>
+							<li>
+								<input id="CAR" type="checkbox"
+									ng-checked="isItemSelected($storage.transportMode, 'CAR')"
+									ng-click="onTransportModeChange($storage.transportMode, 'CAR')"
+								>
+								<label for="CAR" translate>CAR</label>
+							</li>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div id="departureAccessMode" class="form-group">
+					<label for="departureAccessMode" translate>DepartureAccessMode</label>
+					<div class="form-group">
+						<input id="departure-foot" type="checkbox"
+							ng-checked="isItemSelected($storage.departureAccessMode, 'foot')"
+							ng-click="onAccessModeChange($storage.departureAccessMode, 'foot')"
+						>
+						<label for="departure-foot" translate>foot</label>
+						<input id="departure-bicycle" type="checkbox"
+							ng-checked="isItemSelected($storage.departureAccessMode, 'bicycle')"
+							ng-click="onAccessModeChange($storage.departureAccessMode, 'bicycle')"
+						>
+						<label for="departure-bicycle" translate>bicycle</label>
+						<input id="departure-car" type="checkbox"
+							ng-checked="isItemSelected($storage.departureAccessMode, 'car')"
+							ng-click="onAccessModeChange($storage.departureAccessMode, 'car')"
+						>
+						<label for="departure-car" translate>car</label>
+					</div>
+				</div>
+				<div id="arrivalAccessMode" class="form-group">
+					<label for="arrivalAccessMode" translate>ArrivalAccessMode</label>
+					<div class="form-group">
+						<input id="departure-foot" type="checkbox"
+							ng-checked="isItemSelected($storage.arrivalAccessMode, 'foot')"
+							ng-click="onAccessModeChange($storage.arrivalAccessMode, 'foot')"
+						>
+						<label for="departure-foot" translate>foot</label>
+						</li>
+						<input id="departure-bicycle" type="checkbox"
+							ng-checked="isItemSelected($storage.arrivalAccessMode, 'bicycle')"
+							ng-click="onAccessModeChange($storage.arrivalAccessMode, 'bicycle')"
+						>
+						<label for="departure-bicycle" translate>bicycle</label>
+						</li>
+						<input id="departure-car" type="checkbox"
+							ng-checked="isItemSelected($storage.arrivalAccessMode, 'car')"
+							ng-click="onAccessModeChange($storage.arrivalAccessMode, 'car')"
+						>
+						<label for="departure-car" translate>car</label>
+						</li>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="pull-right">
+			<button ng-click="reset()" class="btn btn-primary" translate>Reset</button>
+			<button ng-disabled='!plantripForm.$valid' class="btn btn-primary"
+				ng-click="execute()" translate
+			>Submit</button>
+		</div>
+</div>
+</form>
+</div>

@@ -1,0 +1,45 @@
+<div id="home" ng-controller="HomeCtrl">
+	<a id="contact" href="contact.html" translate>Contact</a>
+	<div>
+		<div ui-view="viewC"></div>
+	</div>
+	<accordion id="responses" close-others="true"> <accordion-group
+		is-open="$parent.accordion_closed"
+	> <accordion-heading>
+	<h1 class="panel-title">
+		<i class="glyphicon glyphicon-search"></i>
+		<span translate>TripPlanner</span>
+	</h1>
+	</accordion-heading>
+	<div ui-view="viewA"></div>
+	</accordion-group> <accordion-group ng-show="model.responses.starting"
+		is-open="$parent.accordion_opened"
+	> <accordion-heading>
+	<h1 class="panel-title">
+		<span ng-if="!model.responses.ending">
+			<i class="fa fa-spinner fa-spin"></i>
+			<span class="searching" translate>Searching</span>
+		</span>
+		<span ng-if="model.responses.ending">
+			<span translate>Solution</span>
+		</span>
+	</h1>
+	</accordion-heading>
+	<div>
+		<div>
+			<div ui-view="viewB"></div>
+			<div class="panel panel-default" ng-controller="DetailCtrl" ng-show="data">
+				<div class="panel-heading">
+					<h1 class="panel-title">
+						<span translate>Detail</span>
+						<span class="label label-primary">{{index +1}}</span>
+					</h1>
+				</div>
+				<div class="panel-body">
+					<div ui-view="viewD"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</accordion-group> </accordion>
+</div>

@@ -1,0 +1,51 @@
+<div id="solution" ng-controller="SolutionCtrl">
+	<div id="trips">
+		<table class="table table-hover table-striped" ng-show="! hasError()">
+			<thead>
+				<tr>
+					<th>
+						<small>#</small>
+					</th>
+					<th>
+						<small translate>DepartureTime</small>
+					</th>
+					<th>
+						<small translate>ArrivalTime</small>
+					</th>
+					<th>
+						<small translate>Duration</small>
+					</th>
+					<th>
+						<small translate>Connection</small>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="response in model.responses.entries"
+					ng-click="onSelect($index)" ng-class="{selected: $index === selected}"
+				>
+					<td>
+						<span class="label label-primary">{{$index +1}}</span>
+					</td>
+					<td>
+						<strong>{{response.header.PlanTripExistenceNotificationResponseType.DepartureTime
+							| amDateFormat:'HH:mm'}}</strong>
+					</td>
+					<td>
+						<strong>{{response.header.PlanTripExistenceNotificationResponseType.ArrivalTime
+							| amDateFormat:'HH:mm'}}</strong>
+					</td>
+					<td>{{response.header.PlanTripExistenceNotificationResponseType.Duration
+						| plantripDurationFormat:'h [h] m [min]'}}</td>
+					<td>
+						<p ng-if="!response.body.PlanTripNotificationResponseType">
+							<i class="fa fa-spinner fa-spin"></i>
+						</p>
+						<span ng-if="response.body.PlanTripNotificationResponseType" class="badge">{{getConnectionCounter(response)}}</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="alert" ng-show="hasError()" role="alert" translate>EmptyResponse</div>
+	</div>
+</div>
