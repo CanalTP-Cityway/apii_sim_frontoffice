@@ -305,15 +305,30 @@ angular
 
 								if ($scope.$storage.arrivalDepartureTimeConstraint == "false") {
 									delete message.PlanTripRequestType.ArrivalTime;
-									message.PlanTripRequestType.DepartureTime = moment(
+									 var date = moment(
+											$scope.$storage.arrivalDepartureDate)
+											.format('YYYY-MM-DD');
+									 var time = moment(
 											$scope.$storage.arrivalDepartureTime)
-											.format('YYYY-MM-DDTHH:mm:ss');
+											.format('HH:mm:ss');
+									message.PlanTripRequestType.DepartureTime = date + 'T' + time;		
+									//message.PlanTripRequestType.DepartureTime = moment(
+									//		$scope.$storage.arrivalDepartureTime)
+									//		.format('YYYY-MM-DDTHH:mm:ss');
 
 								} else {
 									delete message.PlanTripRequestType.DepartureTime;
-									message.PlanTripRequestType.ArrivalTime = moment(
+									 var date = moment(
+											$scope.$storage.arrivalDepartureDate)
+											.format('YYYY-MM-DD');
+									 var time = moment(
 											$scope.$storage.arrivalDepartureTime)
-											.format('YYYY-MM-DDTHH:mm:ss');
+											.format('HH:mm:ss');
+									 message.PlanTripRequestType.ArrivalTime = date + 'T' + time;
+											
+									//message.PlanTripRequestType.ArrivalTime = moment(
+									//		$scope.$storage.arrivalDepartureTime)
+									//		.format('YYYY-MM-DDTHH:mm:ss');
 								}
 
 								for ( var i in $scope.$storage.departureAccessMode) {

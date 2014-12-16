@@ -61,12 +61,13 @@ angular
 								var self = this;
 								self.clear();
 
-								 this.url = 'ws://' + $location.host() + ':'
-										+ $location.port() + '/planner';
-								// this.url = "ws://apii-sim.dev.canaltp.fr/planner"
-								 // this.url =	'ws:///172.18.101.60:8080/websocket/navitia'
-								// this.url = 'ws://82.226.26.241:80/planner'
-
+//								this.url = 'ws://' + $location.host() + ':'
+//										+ $location.port() + '/planner';
+								this.url = 'wss://' + $location.host() + '/planner';
+								
+								// TODO
+								// this.url = "wss://www.apii-sim.fr/planner"
+								
 								this.deferred = $q.defer();
 								this.deferred.promise.then(function() {
 									self.request(value);
@@ -247,7 +248,7 @@ angular
 								}
 								this.timer = $timeout(function() {
 									self.close();
-								}, 1000);							
+								}, 1000);
 							};
 
 							this.exitPlanTripCancellation = function() {
@@ -271,7 +272,7 @@ angular
 								var entry = {
 									header : value,
 									body : null
-								};
+								};					
 								$rootScope.model.responses.entries.push(entry);
 							};
 
@@ -288,7 +289,15 @@ angular
 							};
 
 							this.receiveEndingSearch = function(value) {
-								$rootScope.model.responses.ending = value;
+								$rootScope.model.responses.ending = value;		
+								
+								var array = $rootScope.model.responses.entries;
+								var i = array.length;
+								while (i--) {
+									if (array[i].body == null) {
+										array.splice(i,1);										
+									}
+								}												
 							};
 
 						} ]);
