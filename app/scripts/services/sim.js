@@ -210,7 +210,7 @@ angular
 								}
 								this.timer = $timeout(function() {
 									self.close();
-								}, 1000);
+								}, 3000);
 							};
 
 							this.exitPlanTripResponse = function() {
@@ -248,7 +248,7 @@ angular
 								}
 								this.timer = $timeout(function() {
 									self.close();
-								}, 1000);
+								}, 3000);
 							};
 
 							this.exitPlanTripCancellation = function() {
