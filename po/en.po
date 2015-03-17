@@ -1,0 +1,183 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/views/plantrip.html:161
+msgid "AIR"
+msgstr "AIR"
+
+#: app/views/plantrip.html:121
+msgid "ALL"
+msgstr "All"
+
+#: app/views/plantrip.html:254
+msgid "AccessibilityConstraint"
+msgstr "Wheelchair accessible"
+
+#: app/views/detail.html:61 app/views/plantrip.html:40
+msgid "Arrival"
+msgstr "End"
+
+#: app/views/plantrip.html:228
+msgid "ArrivalAccessMode"
+msgstr "End transit options"
+
+#: app/views/solution.html:13
+msgid "ArrivalTime"
+msgstr "End"
+
+#: app/views/plantrip.html:66
+msgid "ArrivalTimeConstraint"
+msgstr "Depart at"
+
+#: app/views/plantrip.html:193
+msgid "BIKE"
+msgstr "Bike"
+
+#: app/views/plantrip.html:129
+msgid "BUS"
+msgstr "Bus"
+
+#: app/views/plantrip.html:177
+msgid "CABLE"
+msgstr "CABLE"
+
+#: app/views/plantrip.html:201
+msgid "CAR"
+msgstr "Car"
+
+#: app/views/plantrip.html:79
+msgid "Clear"
+msgstr "Clear"
+
+#: app/views/plantrip.html:80
+msgid "Close"
+msgstr "Close"
+
+#: app/views/solution.html:19
+msgid "Connection"
+msgstr "Linking number"
+
+#: app/views/home.html:2
+msgid "Contact"
+msgstr "Contact"
+
+#: app/views/detail.html:17 app/views/plantrip.html:17
+msgid "Departure"
+msgstr "Start"
+
+#: app/views/plantrip.html:208
+msgid "DepartureAccessMode"
+msgstr "Start transit options"
+
+#: app/views/solution.html:10
+msgid "DepartureTime"
+msgstr "Start"
+
+#: app/views/plantrip.html:62
+msgid "DepartureTimeConstraint"
+msgstr "Arrive by"
+
+#: app/views/home.html:49
+msgid "Detail"
+msgstr "Trip Details"
+
+#: app/views/detail.html:45
+msgid "Direction"
+msgstr "Direction"
+
+#: app/views/solution.html:16
+msgid "Duration"
+msgstr "Duration"
+
+#: app/views/solution.html:57
+msgid "EmptyResponse"
+msgstr "No solution"
+
+#: app/views/plantrip.html:45
+msgid "EnterArrival"
+msgstr "Fill your start location"
+
+#: app/views/plantrip.html:23
+msgid "EnterDeparture"
+msgstr "Fill your end location"
+
+#: app/views/detail.html:41
+msgid "Line"
+msgstr "Line"
+
+#: app/views/plantrip.html:153
+msgid "METRO"
+msgstr "Subway"
+
+#: app/views/plantrip.html:103 app/views/plantrip.html:264
+#: app/views/plantrip.html:7
+msgid "Parameters"
+msgstr "Preferences"
+
+#: app/views/plantrip.html:145
+msgid "RAIL"
+msgstr "Train"
+
+#: app/views/plantrip.html:270
+msgid "Reset"
+msgstr "Cancel"
+
+#: app/views/home.html:36
+msgid "Searching"
+msgstr "Searching"
+
+#: app/views/home.html:39
+msgid "Solution"
+msgstr "Solution"
+
+#: app/views/plantrip.html:271
+msgid "Submit"
+msgstr "Plan Trip"
+
+#: app/views/plantrip.html:185
+msgid "TAXI"
+msgstr "TAXI"
+
+#: app/views/plantrip.html:137
+msgid "TRAM"
+msgstr "Tramway"
+
+#: app/views/plantrip.html:78
+msgid "Today"
+msgstr "Today"
+
+#: app/views/plantrip.html:109
+msgid "TransportMode"
+msgstr "Transit options"
+
+#: app/views/home.html:27
+msgid "TripPlanner"
+msgstr "Trip Plan"
+
+#: app/views/plantrip.html:169
+msgid "WATER"
+msgstr "WATER"
+
+#: app/views/plantrip.html:219 app/views/plantrip.html:240
+msgid "bicycle"
+msgstr "Bike"
+
+#: app/views/plantrip.html:224 app/views/plantrip.html:246
+msgid "car"
+msgstr "Car"
+
+#: app/views/detail.html:31 app/views/plantrip.html:214
+#: app/views/plantrip.html:234
+msgid "foot"
+msgstr "Walk"
