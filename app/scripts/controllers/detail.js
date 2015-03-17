@@ -2,11 +2,11 @@
 
 /**
  * @ngdoc function
- * @name plantripApp.controller:DetailCtrl
- * @description # DetailCtrl Controller of the plantripApp
+ * @name apiiSimFrontofficeApp.controller:DetailCtrl
+ * @description # DetailCtrl Controller of the apiiSimFrontofficeApp
  */
 angular
-		.module('plantripApp')
+		.module('apiiSimFrontofficeApp')
 		.controller(
 				'DetailCtrl',
 				[

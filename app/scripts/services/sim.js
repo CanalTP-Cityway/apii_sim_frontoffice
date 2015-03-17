@@ -1,11 +1,11 @@
 'use strict';
 /**
  * @ngdoc service
- * @name plantripApp.sim
- * @description # sim Service in the plantripApp.
+ * @name apiiSimFrontofficeApp.sim
+ * @description # sim Service in the apiiSimFrontofficeApp.
  */
 angular
-		.module('plantripApp')
+		.module('apiiSimFrontofficeApp')
 		.service(
 				'Sim',
 				[
@@ -66,8 +66,9 @@ angular
 								this.url = 'wss://' + $location.host() + '/planner';
 								
 								// TODO
-								// this.url = "wss://www.apii-sim.fr/planner"
-								
+								this.url = "wss://www.apii-sim.fr/planner"
+								//this.url = "wss://apiisim-mtm.cityway.fr/planner"
+										
 								this.deferred = $q.defer();
 								this.deferred.promise.then(function() {
 									self.request(value);

@@ -2,11 +2,11 @@
 
 /**
  * @ngdoc function
- * @name plantripApp.controller:SolutionCtrl
- * @description # SolutionCtrl Controller of the plantripApp
+ * @name apiiSimFrontofficeApp.controller:SolutionCtrl
+ * @description # SolutionCtrl Controller of the apiiSimFrontofficeApp
  */
 angular
-		.module('plantripApp')
+		.module('apiiSimFrontofficeApp')
 		.controller(
 				'SolutionCtrl',
 				[

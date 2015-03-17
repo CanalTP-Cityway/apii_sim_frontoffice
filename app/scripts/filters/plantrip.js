@@ -2,11 +2,11 @@
 
 /**
  * @ngdoc filter
- * @name plantripApp.filter:plantrip
+ * @name apiiSimFrontofficeApp.filter:plantrip
  * @function
- * @description # plantrip Filter in the plantripApp.
+ * @description # plantrip Filter in the apiiSimFrontofficeApp.
  */
-angular.module('plantripApp').filter('plantripDurationFormat',
+angular.module('apiiSimFrontofficeApp').filter('plantripDurationFormat',
 		[ 'moment', function(moment) {
 			return function(value, format) {
 				if (typeof value === 'undefined' || value === null) {

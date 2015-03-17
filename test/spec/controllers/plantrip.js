@@ -3,7 +3,7 @@
 describe('Controller: plantripCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('plantripApp'));
+  beforeEach(module('apiiSimFrontofficeApp'));
 
   var PlantripCtrl,
     scope;

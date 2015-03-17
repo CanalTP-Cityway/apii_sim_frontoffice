@@ -2,14 +2,13 @@
 
 /**
  * @ngdoc overview
- * @name plantripApp
- * @description # plantripApp ²² Main module of the application.
+ * @name apiiSimFrontofficeApp
+ * @description # apiiSimFrontofficeApp Main module of the application.
  */
 angular.module(
-		'plantripApp',
-		[ 'ngAnimate', 'ngCookies', 'ngResource', 'ngSanitize', 'ngTouch',
-				'gettext', 'ui.router', 'angularMoment', 'ngStorage',
-				'ui.bootstrap', 'leaflet-directive' ]).config(
+		'apiiSimFrontofficeApp',
+		[ 'ngAnimate', 'ngCookies', 'ngResource', 'ngSanitize', 'ngTouch', 'ngLocale', 'gettext', 'ui.router', 'angularMoment',
+				'ngStorage', 'ui.bootstrap', 'leaflet-directive' ]).config(
 
 function($stateProvider, $urlRouterProvider) {
 
@@ -36,12 +35,10 @@ function($stateProvider, $urlRouterProvider) {
 			'viewD@home' : {
 				templateUrl : 'views/detail.html',
 				controller : 'DetailCtrl'
-			}			
+			},
+			'viewE@home' : {
+				templateUrl : 'views/header.html'
+			}
 		}
 	});
-
-}).run(function(gettextCatalog) {
-	gettextCatalog.currentLanguage = 'fr';
-	gettextCatalog.debug = true;
-}).constant('angularMomentConfig', {
 });

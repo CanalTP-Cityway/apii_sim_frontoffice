@@ -3,7 +3,7 @@
 describe('Filter: plantrip', function () {
 
   // load the filter's module
-  beforeEach(module('plantripApp'));
+  beforeEach(module('apiiSimFrontofficeApp'));
 
   // initialize a new instance of the filter before each test
   var plantrip;

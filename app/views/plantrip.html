@@ -1,15 +1,15 @@
 <div id="plantrip" ng-controller="PlantripCtrl">
-	<div class="clearfix">
-		<a data-toggle="collapse" data-parent="#parameters" href="#parameters"
-			class="collapsed"
-		>
-			<button type="submit" class="btn btn-default pull-right"
-				title="{{ parameters_tooltip | translate}}"
-			>
-				<i class="fa fa-cogs"></i>
-			</button>
-		</a>
-	</div>
+	<!-- 	<div class="clearfix"> -->
+	<!-- 		<a data-toggle="collapse" data-parent="#parameters" href="#parameters" -->
+	<!-- 			class="collapsed" -->
+	<!-- 		> -->
+	<!-- 			<button type="submit" class="btn btn-default pull-right" -->
+	<!-- 				title="{{ 'Parameters' | translate}}" -->
+	<!-- 			> -->
+	<!-- 				<i class="fa fa-cogs"></i> -->
+	<!-- 			</button> -->
+	<!-- 		</a> -->
+	<!-- 	</div> -->
 	<form name="plantripForm" novalidate role="form" class="container-fluid">
 		<div class="form-group row "
 			ng-class="{ 'has-error': hasError('Departure') && plantripForm.Departure.$dirty}"
@@ -69,12 +69,15 @@
 			<div class="table">
 				<div class="table-row;">
 					<div id="arrivalDepartureDateTime" class="table-cell"
-						
+						ng-class="{ 'has-error': hasError('ArrivalDepartureTime' , ['DepartureTime','ArrivalTime']) }"
 					>
 						<p class="input-group">
 							<input type="text" class="form-control"
 								ng-model="$storage.arrivalDepartureDate" datepicker-popup="dd/MM/yyyy"
 								is-open="opened" name="ArrivalDepartureTime"
+								current-text="{{ 'Today' | translate}}"
+								clear-text="{{ 'Clear' | translate}}"
+								close-text="{{ 'Close' | translate}}" required
 							/>
 							<span class="input-group-btn">
 								<button type="button" class="btn btn-default" ng-click="open($event)">
@@ -84,7 +87,9 @@
 						</p>
 					</div>
 					<div class="table-cell">
-						<timepicker ng-model="$storage.arrivalDepartureTime" show-meridian=false />
+						<timepicker ng-model="$storage.arrivalDepartureTime" show-meridian=false
+							required
+						/>
 					</div>
 				</div>
 				<span class="help-block"
@@ -93,9 +98,9 @@
 					['DepartureTime','ArrivalTime'])}}</span>
 			</div>
 		</div>
-		<div id="parameters" class="panel panel-default panel-collapse collapse row">
+		<div id="parameters" class="panel panel-default" collapse="collapsed" ng-init="collapsed = true">
 			<div class="panel-heading">
-				<h1 class="panel-title" translate>Parameters</h1>
+				<span class="panel-title" translate>Parameters</span>
 			</div>
 			<div class="panel-body">
 				<div class="form-group">
@@ -105,13 +110,12 @@
 					<label for="accessibilityConstraint" translate>AccessibilityConstraint</label>
 				</div>
 				<div id="transportMode" class="form-group">
-					<div class="btn-group">
-						<button class="btn btn-default" translate>TransportMode</button>
-						<button data-toggle="dropdown" class="btn btn-default dropdown-toggle"
-							data-placeholder="false"
-						>
+					<div class="btn-group" dropdown>
+						<button type="button" class="btn btn-default" translate>TransportMode</button>
+						<button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle>
 							<span class="caret"></span>
 						</button>
+			
 						<ul class="dropdown-menu">
 							<li>
 								<input id="ALL" type="checkbox"
@@ -249,11 +253,17 @@
 				</div>
 			</div>
 		</div>
-		<div class="pull-right">
-			<button ng-click="reset()" class="btn btn-primary" translate>Reset</button>
-			<button ng-disabled='!plantripForm.$valid' class="btn btn-primary"
-				ng-click="execute()" translate
-			>Submit</button>
+		<div class="form-group row">
+			<div id="config" class="pull-left">
+				<a class="btn btn-link" title="{{ 'Parameters' | translate}} "ng-click="collapsed = !collapsed"
+				>{{ 'Parameters' | translate}} </a>
+			</div>
+			<div class="pull-right">
+				<button ng-click="reset()" class="btn btn-primary" translate>Reset</button>
+				<button ng-disabled='!plantripForm.$valid' class="btn btn-primary"
+					ng-click="execute()" translate
+				>Submit</button>
+			</div>
 		</div>
 </div>
 </form>
