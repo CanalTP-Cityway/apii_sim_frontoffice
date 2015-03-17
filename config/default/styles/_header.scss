@@ -1,0 +1,8 @@
+$panel-default-text: darken(#428bca, 6.5%);
+$label-default-bg: darken(#428bca, 6.5%);; 
+// $font-size-base: 12px;
+
+$panel-primary-text: extend panel-default-text; 
+$panel-primary-border: extend panel-default-border;
+$panel-primary-heading-bg: extend panel-default-heading-bg;
+
