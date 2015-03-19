@@ -5,68 +5,101 @@
  * @name apiiSimFrontofficeApp.controller:HomeCtrl
  * @description # HomeCtrl Controller of the apiiSimFrontofficeApp
  */
-angular
-		.module('apiiSimFrontofficeApp')
-		.controller(
-				'HomeCtrl',
-				[
-						'$scope',
-						'$log',
-						'Locale',
-						function($scope, $log, Locale) {
+angular.module('apiiSimFrontofficeApp').controller(
+		'HomeCtrl',
+		[
+				'$scope',
+				'$log',
+				'Locale',
+				'$window',
+				function($scope, $log, Locale, $window) {
 
-							$scope.groups = [ {
-								open : true
-							}, {
-								open : false
-							} ];
+					$scope.groups = [ {
+						open : true
+					}, {
+						open : false
+					} ];
 
-							Locale.setLocale('fr');
+					$scope.disabled = true;
 
-							$scope.$watch('model.responses.starting', function(value) {
-								if (value != null) {
-									$scope.groups[1].open = true;
-								}
-							});
+					Locale.setLocale('fr');
 
-							$scope.setLocale = function(locale) {
-								Locale.setLocale(locale);
-							}
+					$scope.$watch('model.responses.starting', function(value) {
+						if (value != null) {
+							$scope.groups[1].open = true;
+						}
+					});
 
-							$scope.getLocale = function() {
-								return Locale.getLocale();
-							}
+					$scope.setLocale = function(locale) {
+						Locale.setLocale(locale);
+					}
 
-							$scope.$watch('model.departure', function(value) {
-								$scope.groups[0].open = true;
-							}, true);
+					$scope.getLocale = function() {
+						return Locale.getLocale();
+					}
 
-							$scope.$watch('model.arrival', function(value) {
-								$scope.groups[0].open = true;
-							}, true);
+					$scope.$watch('model.departure', function(value) {
+						$scope.groups[0].open = true;
+					}, true);
 
-							$scope.print = function() {
-								
-								$log.info("[DSU] call print");
+					$scope.$watch('model.arrival', function(value) {
+						$scope.groups[0].open = true;
+					}, true);
 
-//								var DocumentContainer = document.getElementById('toto');
-//								var html = '<html><head>'
-//										+ '<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />'
-//										+ '<link rel="stylesheet" media="print" href="bower_components/leaflet/dist/leaflet.css"  />'
-//										+ '<link rel="stylesheet" media="print" href="bower_components/bootstrap/dist/css/bootstrap.css" />'
-//										+ '<link rel="stylesheet" href="styles/main.css"/>'
-//										+ '<link rel="stylesheet" href="styles/plantrip.css" />'
-//										+ '<link rel="stylesheet" href="styles/fontello.css" />'
-//										+ '</head><body style="background:#ffffff;">' + DocumentContainer.innerHTML
-//										+ '</body></html>';
-//
-//								var WindowObject = window.open("", "PrintWindow",
-//										"width=750,height=650,top=50,left=50,toolbars=no,scrollbars=yes,status=no,resizable=yes");
-//								WindowObject.document.writeln(html);
-//								WindowObject.document.close();
-//								WindowObject.focus();
-//								WindowObject.print();
-//								WindowObject.close();
+					$scope.$on('solution', function(event, index, data) {
+						$scope.disabled = (index >= 0) ? false : true;
+					});
 
-							};
-						} ]);
+					$scope.print = function() {
+						// print();
+						printPage();
+					};
+
+					function closePrint() {
+						document.body.removeChild(this.__container__);
+					}
+
+					function setPrint() {
+						this.contentWindow.__container__ = this;
+						this.contentWindow.onbeforeunload = closePrint;
+						this.contentWindow.onafterprint = closePrint;
+						this.contentWindow.focus(); // Required for IE
+						this.contentWindow.print();
+					}
+
+					function printPage() {
+						var element = angular.element('#print-detail')[0];
+						var html = '<html><head>'
+								+ '<link rel="stylesheet" type="text/css" media="print" href="styles/print.css"/>'
+								+ '</head><body>' + element.innerHTML + '</body></html>';
+						
+						var iframe = document.createElement('iframe');
+						document.body.appendChild(iframe);
+
+						iframe.style.visibility = "hidden";
+						iframe.style.position = "fixed";
+						iframe.style.right = "0";
+						iframe.style.bottom = "0";					
+						iframe.contentWindow.document.open();
+						iframe.contentWindow.document.write(html);
+						iframe.contentWindow.document.close();
+						
+						iframe.onload = setPrint;
+
+	
+					}
+
+					function print() {
+						var element = angular.element('#print-detail')[0];
+						var html = '<html><head>'
+								+ '<link rel="stylesheet" type="text/css" media="print" href="styles/print.css"/>'
+								+ '</head><body  onafterprint="self.close()" onload="window.print()">' + element.innerHTML
+								+ '</body></html>';
+
+						var printer = $window.open("", "print", "status=1,width=800,height=600");
+						printer.document.writeln(html);
+						printer.document.close();
+						printer.focus();
+					}
+
+				} ]);

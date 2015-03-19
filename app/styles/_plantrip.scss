@@ -32,6 +32,7 @@ a:hover{
 .label {
   padding: 0.2em 0.6em 0.2em ;
 }
+
 #home {
 	position: absolute;
 	top: 0px;  
@@ -44,27 +45,47 @@ a:hover{
 	position: absolute; 
 	top: 9px; 
 	right: 50px; 
-	z-index: 1002;
+	z-index: 2000;
+	.btn {
+		padding: 2px;
+		margin: 2px;
+	}
 	.dropdown-menu {
-  		min-width: 68px;
- 	}		
+		padding: 2px;
+		margin: 2px;
+  		min-width: 36px;
+ 	}		 	
 	.lang-fr {
+	margin-left: auto;
+    margin-right: auto;
  		height: 17px;
  		width: 30px;
 		background-image: url("/images/fr.png");
+		padding: 2px;
+		margin: 2px;
 	}
 	.lang-en {
+	margin-left: auto;
+    margin-right: auto;
 		height: 17px;
  		width: 30px;
 		background-image: url("/images/en.png");
+		padding: 2px;
+		margin: 2px;
 	}
 }
 
 #print {
 	position: absolute; 
 	top: 9px; 
-	right: 120px; 
-	z-index: 1002;
+	right: 100px; 
+	z-index: 2000;
+	.btn {
+		height: 27px;
+ 		width: 40px; 
+ 		padding: 2px;
+		margin: 2px;		
+	}	
 }
 	
 #header {
@@ -162,13 +183,9 @@ a:hover{
     padding-right: 10px; 
     padding-top: 4%;
   }
-  /* 
-  a:not(.collapsed) {
-   .btn {
-      background-color: $gray-lighter ;
-    }
-  }
-  */
+  /*
+	 * a:not(.collapsed) { .btn { background-color: $gray-lighter ; } }
+	 */
   .table{
     margin-bottom: 0px !important;
   }
@@ -188,7 +205,6 @@ a:hover{
   top: 15px; 
   left: 10px;
   .panel {
-      //[DSU]overflow: auto !important;
       overflow: visible;
   }
 }
@@ -224,8 +240,6 @@ a:hover{
     }
     
     .step{ 
-    
-  
        .leg {
         padding-left: 10px;
        }

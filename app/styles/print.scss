@@ -1,0 +1,135 @@
+@import "header";
+$icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
+$fa-font-path: "/bower_components/font-awesome/fonts";
+@import "font-awesome/scss/font-awesome";
+@import "custom-bootstrap";
+@import "fontello";
+
+@media print {
+	body {-webkit-print-color-adjust: exact;}
+}
+
+h1{ color: $brand-primary !important; }
+
+.selected {
+	background-color: $gray-lighter !important;
+  	td {
+    	background-color: $gray-lighter !important;
+  	}
+}
+
+#detail-step:hover { background: $table-bg-hover; cursor: pointer;}
+
+.table-hover tbody tr:hover > td {
+  cursor: pointer;
+}
+
+a:hover{
+  cursor: pointer;
+}
+    
+.table {
+  display: table;
+}
+
+.table-row {
+  display: table-row;
+}
+
+.table-cell {
+  display: table-cell;
+}
+
+.label {
+  padding: 0.2em 0.6em 0.2em ;
+}
+
+#detail{
+
+    overflow-y:auto;
+    
+    .steps{
+        width: 100%;
+    }
+    
+    .step{ 
+    
+       .leg {
+        padding-left: 10px;
+       }
+     
+       .waiting{
+        padding-left: 10px;
+       }
+       
+       .duration {
+       }
+     
+       .ptride {
+        padding-left: 10px;
+       }
+                            
+       &.stop_point{
+       	.table-cell{
+         padding: 3px 0px 3px 0px;   
+
+        }
+
+            .departure_time{
+                text-align: center;
+                width: 6em;
+            }    
+        
+            .trip_picture{
+                text-align: center;            
+                .fa{
+                    display: inline-block;
+                 }
+            }
+            
+            .stop_point_name{
+                margin-left: 5px;
+            }
+            
+            td{
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+        }                   
+            
+        .elapsed_time{
+            color: $brand-primary;
+            font-size: 11px;           
+            text-align: center;
+            width: 7em;
+            vertical-align: middle;
+
+        }
+            
+        .disturbed_line{
+            color: $brand-warning;                      
+            text-align: center;
+        }
+         
+        .tad{
+            margin-left: 10px;
+        }            
+                    
+        .trip_link{
+            background-image: url("http://www.vianavigo.com/fileadmin/templates/STIF/images/way.transport.png"); background-repeat: repeat-y; 
+            background-position: center;    
+        }                  
+            
+        &.departure{
+                .icon-location{
+                  color: green;                        
+                }   
+        }
+
+        &.arrival{
+                .icon-location{
+                        color: red;                        
+                }   
+        }                        
+    }
+}

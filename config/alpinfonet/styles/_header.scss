@@ -47,17 +47,14 @@ $label-default-bg: $gray-darker;
 	}
 
 }
-#config {
-	display: none;
-}
 
-#print {
-	display: none;
-}
+#print { 
+	top: 29px !important;
+} 
 
-#locale {
-	display: none;
-}
+#locale { 
+	top: 29px !important;
+} 
 
 #detail .elapsed_time{
 	color: $blue !important;

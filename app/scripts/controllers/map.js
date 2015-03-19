@@ -64,6 +64,14 @@ angular.module('apiiSimFrontofficeApp').controller(
 									popup.openOn(map);
 								});
 					});
+					
+					$scope.$on('reset', function(event) {
+						Config.getConfig().then(function(result) {
+							leafletData.getMap().then(function(map) {
+								map.fitBounds(result.bounds)
+							});
+						});						
+					});
 
 					$scope.$on('solution', function(event, index, data) {
 						$scope.solution.index = index;
@@ -314,7 +322,8 @@ angular.module('apiiSimFrontofficeApp').controller(
 						var lat = departure.TripStopPlace.Position.Latitude;
 						var name = departure.TripStopPlace.Name;
 						var city_name = (departure.TripStopPlace.CityName) ? departure.TripStopPlace.CityName : "";
-						var line = (section.Line) ? section.Line.Name : "";
+						//var line = (section.Line) ? section.Line.Name : "";
+						var line = (section.Line) ? section.Line.Number : "";
 						var direction = section.StopHeadSign;
 
 						var marker = {

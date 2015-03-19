@@ -66,8 +66,12 @@ angular.module('apiiSimFrontofficeApp').controller(
 						$scope.model.departure.lat = 0;
 						$scope.model.arrival.lng = 0;
 						$scope.model.arrival.lat = 0;
+						$scope.$storage.arrivalDepartureDate = new Date();
+						$scope.$storage.arrivalDepartureTime = new Date();
+						$location.search({});
 						Sim.clear();
 						$rootScope.$broadcast('solution', -1, null);
+						$rootScope.$broadcast('reset');
 					};
 
 					$scope.reverse = function() {

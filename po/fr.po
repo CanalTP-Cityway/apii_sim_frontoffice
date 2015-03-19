@@ -11,173 +11,187 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.7.3\n"
 
-#: app/views/plantrip.html:161
+#: app/views/plantrip.html:165 dist/views/plantrip.html:1
 msgid "AIR"
 msgstr "Avion"
 
-#: app/views/plantrip.html:121
+#: app/views/plantrip.html:125 dist/views/plantrip.html:1
 msgid "ALL"
 msgstr "Tous"
 
-#: app/views/plantrip.html:254
+#: app/views/plantrip.html:110 dist/views/plantrip.html:1
 msgid "AccessibilityConstraint"
 msgstr "Contraintes d'accessibilité"
 
 #: app/views/detail.html:61 app/views/plantrip.html:40
+#: dist/views/detail.html:1 dist/views/plantrip.html:1
 msgid "Arrival"
 msgstr "Arrivée"
 
-#: app/views/plantrip.html:228
+#: app/views/plantrip.html:232 dist/views/plantrip.html:1
 msgid "ArrivalAccessMode"
 msgstr "Mode d'accès à l'arrivée"
 
-#: app/views/solution.html:13
+#: app/views/solution.html:13 dist/views/solution.html:1
 msgid "ArrivalTime"
 msgstr "Arrivée"
 
-#: app/views/plantrip.html:66
+#: app/views/plantrip.html:66 dist/views/plantrip.html:1
 msgid "ArrivalTimeConstraint"
 msgstr "Horaire de départ"
 
-#: app/views/plantrip.html:193
+#: app/views/plantrip.html:197 dist/views/plantrip.html:1
 msgid "BIKE"
 msgstr "Vélo"
 
-#: app/views/plantrip.html:129
+#: app/views/plantrip.html:133 dist/views/plantrip.html:1
 msgid "BUS"
 msgstr "Bus"
 
-#: app/views/plantrip.html:177
+#: app/views/plantrip.html:181 dist/views/plantrip.html:1
 msgid "CABLE"
 msgstr "Funiculaire"
 
-#: app/views/plantrip.html:201
+#: app/views/plantrip.html:205 dist/views/plantrip.html:1
 msgid "CAR"
 msgstr "Voiture"
 
-#: app/views/plantrip.html:79
+#: app/views/plantrip.html:79 dist/views/plantrip.html:1
 msgid "Clear"
 msgstr "Nettoyer"
 
-#: app/views/plantrip.html:80
+#: app/views/plantrip.html:80 dist/views/plantrip.html:1
 msgid "Close"
 msgstr "Fermer"
 
-#: app/views/solution.html:19
+#: app/views/solution.html:19 dist/views/solution.html:1
 msgid "Connection"
 msgstr "Correspondances"
 
-#: app/views/home.html:2
+#: app/views/home.html:2 dist/views/home.html:1
 msgid "Contact"
 msgstr "Contact"
 
 #: app/views/detail.html:17 app/views/plantrip.html:17
+#: dist/views/detail.html:1 dist/views/plantrip.html:1
 msgid "Departure"
 msgstr "Départ"
 
-#: app/views/plantrip.html:208
+#: app/views/plantrip.html:212 dist/views/plantrip.html:1
 msgid "DepartureAccessMode"
 msgstr "Mode d'accès au départ"
 
-#: app/views/solution.html:10
+#: app/views/solution.html:10 dist/views/solution.html:1
 msgid "DepartureTime"
 msgstr "Départ"
 
-#: app/views/plantrip.html:62
+#: app/views/plantrip.html:62 dist/views/plantrip.html:1
 msgid "DepartureTimeConstraint"
 msgstr "Horaire d'arrivée"
 
-#: app/views/home.html:49
+#: app/views/home.html:50 dist/views/home.html:1
 msgid "Detail"
 msgstr " Détails du trajet "
 
-#: app/views/detail.html:45
+#: app/views/detail.html:45 dist/views/detail.html:1
 msgid "Direction"
 msgstr "Direction"
 
-#: app/views/solution.html:16
+#: app/views/solution.html:16 dist/views/solution.html:1
 msgid "Duration"
 msgstr "Durée"
 
-#: app/views/solution.html:57
+#: app/views/solution.html:57 dist/views/solution.html:1
 msgid "EmptyResponse"
 msgstr "Aucune solution pour votre recherche"
 
-#: app/views/plantrip.html:45
+#: app/views/plantrip.html:45 dist/views/plantrip.html:1
 msgid "EnterArrival"
 msgstr "Saisir votre destination"
 
-#: app/views/plantrip.html:23
+#: app/views/plantrip.html:23 dist/views/plantrip.html:1
 msgid "EnterDeparture"
 msgstr "Saisir votre adresse de départ"
 
-#: app/views/detail.html:41
+#: app/views/detail.html:41 dist/views/detail.html:1
 msgid "Line"
 msgstr "Ligne"
 
-#: app/views/plantrip.html:153
+#: app/views/home.html:4
+msgid "Locale"
+msgstr "Langue"
+
+#: app/views/plantrip.html:157 dist/views/plantrip.html:1
 msgid "METRO"
 msgstr "Métro"
 
-#: app/views/plantrip.html:103 app/views/plantrip.html:264
-#: app/views/plantrip.html:7
+#: app/views/plantrip.html:103 app/views/plantrip.html:258
+#: app/views/plantrip.html:259 app/views/plantrip.html:7
+#: dist/views/plantrip.html:1
 msgid "Parameters"
 msgstr "Recherche avancée"
 
-#: app/views/plantrip.html:145
+#: app/views/home.html:18 dist/views/home.html:1
+msgid "Print"
+msgstr "Impression"
+
+#: app/views/plantrip.html:149 dist/views/plantrip.html:1
 msgid "RAIL"
 msgstr "Rail"
 
-#: app/views/plantrip.html:270
+#: app/views/plantrip.html:262 dist/views/plantrip.html:1
 msgid "Reset"
 msgstr "Annuler"
 
-#: app/views/home.html:36
+#: app/views/home.html:40 dist/views/home.html:1
 msgid "Searching"
 msgstr " Recherche en cours..."
 
-#: app/views/home.html:39
+#: app/views/home.html:42 dist/views/home.html:1
 msgid "Solution"
 msgstr " Résultats de votre recherche"
 
-#: app/views/plantrip.html:271
+#: app/views/plantrip.html:263 dist/views/plantrip.html:1
 msgid "Submit"
 msgstr "Rechercher"
 
-#: app/views/plantrip.html:185
+#: app/views/plantrip.html:189 dist/views/plantrip.html:1
 msgid "TAXI"
 msgstr "Taxi"
 
-#: app/views/plantrip.html:137
+#: app/views/plantrip.html:141 dist/views/plantrip.html:1
 msgid "TRAM"
 msgstr "Tramway"
 
-#: app/views/plantrip.html:78
+#: app/views/plantrip.html:78 dist/views/plantrip.html:1
 msgid "Today"
 msgstr "Aujourd'hui"
 
-#: app/views/plantrip.html:109
+#: app/views/plantrip.html:114 dist/views/plantrip.html:1
 msgid "TransportMode"
 msgstr "Mode de transport"
 
-#: app/views/home.html:27
+#: app/views/home.html:32 dist/views/home.html:1
 msgid "TripPlanner"
 msgstr " Recherche d'itinéraire"
 
-#: app/views/plantrip.html:169
+#: app/views/plantrip.html:173 dist/views/plantrip.html:1
 msgid "WATER"
 msgstr "Bateau"
 
-#: app/views/plantrip.html:219 app/views/plantrip.html:240
+#: app/views/plantrip.html:223 app/views/plantrip.html:244
+#: dist/views/plantrip.html:1
 msgid "bicycle"
 msgstr "Vélo"
 
-#: app/views/plantrip.html:224 app/views/plantrip.html:246
+#: app/views/plantrip.html:228 app/views/plantrip.html:250
+#: dist/views/plantrip.html:1
 msgid "car"
 msgstr "Voiture"
 
-#: app/views/detail.html:31 app/views/plantrip.html:214
-#: app/views/plantrip.html:234
+#: app/views/detail.html:31 app/views/plantrip.html:218
+#: app/views/plantrip.html:238 dist/views/detail.html:1
+#: dist/views/plantrip.html:1
 msgid "foot"
 msgstr "Piéton"
 
