@@ -12,7 +12,8 @@ angular.module('apiiSimFrontofficeApp').controller(
 				'$log',
 				'Locale',
 				'$window',
-				function($scope, $log, Locale, $window) {
+				'$timeout',
+				function($scope, $log, Locale, $window, $timeout) {
 
 					$scope.groups = [ {
 						open : true
@@ -51,55 +52,63 @@ angular.module('apiiSimFrontofficeApp').controller(
 					});
 
 					$scope.print = function() {
-						// print();
-						printPage();
-					};
-
-					function closePrint() {
-						document.body.removeChild(this.__container__);
-					}
-
-					function setPrint() {
-						this.contentWindow.__container__ = this;
-						this.contentWindow.onbeforeunload = closePrint;
-						this.contentWindow.onafterprint = closePrint;
-						this.contentWindow.focus(); // Required for IE
-						this.contentWindow.print();
-					}
-
-					function printPage() {
 						var element = angular.element('#print-detail')[0];
-						var html = '<html><head>'
-								+ '<link rel="stylesheet" type="text/css" media="print" href="styles/print.css"/>'
+						var html = '<html><head>' + '<link rel="stylesheet" type="text/css" media="print" href="styles/main.css"/>'
 								+ '</head><body>' + element.innerHTML + '</body></html>';
-						
+
 						var iframe = document.createElement('iframe');
 						document.body.appendChild(iframe);
-
 						iframe.style.visibility = "hidden";
 						iframe.style.position = "fixed";
-						iframe.style.right = "0";
-						iframe.style.bottom = "0";					
-						iframe.contentWindow.document.open();
-						iframe.contentWindow.document.write(html);
-						iframe.contentWindow.document.close();
-						
-						iframe.onload = setPrint;
+						iframe.style.lef = "0";
+						iframe.style.top = "0";
+						iframe.style.width = "100%";
+						iframe.style.height = "100%";
+						iframe.style.background = '#FFFFFF';
+						iframe.onload = print;
 
-	
+						iframe.contentDocument.open();
+						iframe.contentDocument.write(html);
+						iframe.contentDocument.close();
+					};
+
+					function close() {
+						var iframe = this.__container__;
+						$timeout(function() {
+							document.body.removeChild(iframe);
+						}, 1000);
 					}
 
 					function print() {
-						var element = angular.element('#print-detail')[0];
-						var html = '<html><head>'
-								+ '<link rel="stylesheet" type="text/css" media="print" href="styles/print.css"/>'
-								+ '</head><body  onafterprint="self.close()" onload="window.print()">' + element.innerHTML
-								+ '</body></html>';
-
-						var printer = $window.open("", "print", "status=1,width=800,height=600");
-						printer.document.writeln(html);
-						printer.document.close();
-						printer.focus();
+						this.contentWindow.__container__ = this;
+						this.contentWindow.onbeforeunload = close;
+						this.contentWindow.onafterprint = close;
+						this.contentWindow.focus(); // Required for IE
+						this.contentWindow.print();
+						if(getBrowserName() == "chrome"){
+							document.body.removeChild(this)
+						}
 					}
 
+					function getBrowserName() {
+
+						var userAgent = $window.navigator.userAgent;
+						var browsers = {
+							chrome : /chrome/i,
+							safari : /safari/i,
+							firefox : /firefox/i,
+							ie : /internet explorer/i
+						};
+
+						for ( var key in browsers) {
+							if (browsers[key].test(userAgent)) {
+								return key;
+							}
+						}
+						;
+
+						return 'unknown';
+					}
+
+					$log.info('[DSU] browser : ' + getBrowserName());
 				} ]);

@@ -1,7 +1,11 @@
+@media print {
+	body {-webkit-print-color-adjust: exact;}
+}
+
 @import "header";
 $icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
 // bower:scss
-@import "bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss";
+// @import "bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss";
 // endbower
 
 $fa-font-path: "/bower_components/font-awesome/fonts";
@@ -10,6 +14,8 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
 @import "custom-bootstrap";
 @import "fontello";
 @import "plantrip";
+
+
 
 .browsehappy {
   margin: 0.2em 0;

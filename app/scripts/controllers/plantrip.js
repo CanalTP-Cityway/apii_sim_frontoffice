@@ -48,7 +48,6 @@ angular.module('apiiSimFrontofficeApp').controller(
 						$event.stopPropagation();
 						$scope.opened = !$scope.opened;
 					};
-					
 
 					$scope.execute = function() {
 						Sim.cancellation(createPlanTripCancellationRequest());
@@ -257,13 +256,15 @@ angular.module('apiiSimFrontofficeApp').controller(
 							"time" : new Date($scope.$storage.arrivalDepartureTime).getTime(),
 							"a_time" : $scope.$storage.arrivalDepartureTimeConstraint
 						};
-						// $log.info('[DSU] encode URL' + JSON.stringify(param));
+						// $log.info('[DSU] encode URL' +
+						// JSON.stringify(param));
 						$location.search(param);
 					}
 
 					function decodeURL() {
 						var param = $location.search();
-						// $log.info('[DSU] decode URL' + JSON.stringify(param));
+						// $log.info('[DSU] decode URL' +
+						// JSON.stringify(param));
 						if (param.d_lng != undefined)
 							$rootScope.model.departure.lng = parseFloat(param.d_lng);
 						if (param.d_lat != undefined)
@@ -357,6 +358,7 @@ angular.module('apiiSimFrontofficeApp').controller(
 						$scope.opened = false;
 						$scope.$storage = $sessionStorage.$default(DEFAULT);
 						decodeURL();
+						$rootScope.debug = ($location.port() == 9000) ? true : false;
 					}
 
 					initialize();
