@@ -35,10 +35,30 @@ angular.module('apiiSimFrontofficeApp').controller(
 						$rootScope.model.arrival.lat = lat;
 					}
 
-					$scope.$on('leafletDataDirectivePath.click', function(event, data) {
+					$scope.$on('leafletDirectivePath.click', function(event, data) {
 						if (data.pathName.substr(0, 2) === 'p_') {
 							$rootScope.$broadcast('map', data.pathName.slice(2));
 						}
+					});
+
+					$scope.$on('leafletDirectivePath.mouseover', function(event, data) {
+						leafletData.getMap().then(function(map) {
+							var latlng = data.leafletEvent.latlng;
+							var popup = L.popup({
+								closeButton : false
+							});
+
+							if (data.pathName.substr(0, 2) === 'p_') {
+								var path = $scope.paths[data.pathName];
+								popup.setContent('<p>' + path.title + '</p>');
+								popup.setLatLng(latlng);
+								popup.openOn(map);
+							}
+						});
+					});
+
+					$scope.$on('leafletDirectivePath.mouseout', function(event, data) {
+
 					});
 
 					$scope.$on('leafletDirectiveMap.contextmenu', function(event, data) {
@@ -64,13 +84,13 @@ angular.module('apiiSimFrontofficeApp').controller(
 									popup.openOn(map);
 								});
 					});
-					
+
 					$scope.$on('reset', function(event) {
 						Config.getConfig().then(function(result) {
 							leafletData.getMap().then(function(map) {
 								map.fitBounds(result.bounds)
 							});
-						});						
+						});
 					});
 
 					$scope.$on('solution', function(event, index, data) {
@@ -97,8 +117,10 @@ angular.module('apiiSimFrontofficeApp').controller(
 
 						for ( var i in $scope.paths) {
 							$scope.paths[i].color = $scope.paths[i].stroke_color;
+							$scope.paths[i].weight = $scope.paths[i].stroke_weight;
 						}
 						$scope.paths['p_' + index].color = '#777';
+						$scope.paths['p_' + index].weight = 7;
 
 					});
 
@@ -156,7 +178,8 @@ angular.module('apiiSimFrontofficeApp').controller(
 							paths : {},
 							events : {
 								path : {
-									enable : [ 'mouseover', 'click', 'contextmenu' ],
+									enable : [ 'click', 'contextmenu' ],
+									// enable : [ 'click', 'contextmenu', 'mouseover', 'mouseout' ],
 									logic : 'emit'
 								}
 							},
@@ -168,7 +191,7 @@ angular.module('apiiSimFrontofficeApp').controller(
 						$scope.markers['departure'] = $rootScope.model.departure;
 
 						Config.getConfig().then(function(result) {
-							leafletData.getMap().then(function(map) {
+							leafletData.getMap().then(function(map) {							
 								map.fitBounds(result.bounds)
 							});
 						});
@@ -246,19 +269,18 @@ angular.module('apiiSimFrontofficeApp').controller(
 
 								var path = {
 									stroke_color : '#03f',
-									weight : 5,
+									stroke_weight : 5,
 									opacity : 0.6,
+									title : (section.Line) ? section.Line.Number : "",
 									latlngs : []
 								};
 
 								if (mode == 'foot') {
-									// path.dashArray = '5, 15, 5, 15';
 									path.stroke_color = '#0f0';
-								} else {
-									// delete path.dashArray;
 								}
 
 								path.color = path.stroke_color;
+								path.weight = path.stroke_weight;
 
 								if (steps) {
 
@@ -322,7 +344,7 @@ angular.module('apiiSimFrontofficeApp').controller(
 						var lat = departure.TripStopPlace.Position.Latitude;
 						var name = departure.TripStopPlace.Name;
 						var city_name = (departure.TripStopPlace.CityName) ? departure.TripStopPlace.CityName : "";
-						//var line = (section.Line) ? section.Line.Name : "";
+						// var line = (section.Line) ? section.Line.Name : "";
 						var line = (section.Line) ? section.Line.Number : "";
 						var direction = section.StopHeadSign;
 
@@ -341,7 +363,8 @@ angular.module('apiiSimFrontofficeApp').controller(
 						marker.lng = lng;
 						marker.lat = lat;
 						var text = gettextCatalog.getString("Line")
-						marker.title = '[' + text + ' ' + line + '] ' + name;
+						// marker.title = '[' + text + ' ' + line + '] ' + name;
+						marker.title = name;
 
 						marker.message = createPopup(name, city_name, arrival.DateTime, departure.DateTime, mode, line, direction)
 						return marker;
@@ -373,7 +396,7 @@ angular.module('apiiSimFrontofficeApp').controller(
 									+ gettextCatalog.getString("Direction") + ' ' + direction;
 							header = '<div class="popup-header"><i class="' + icon + '"></i>' + text + '</div>';
 						}
-						
+
 						var arrivalText = gettextCatalog.getString("Arrival") + ' ' + arrival;
 						var departureText = gettextCatalog.getString("Departure") + ' ' + departure;
 

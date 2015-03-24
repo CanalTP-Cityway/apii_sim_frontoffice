@@ -9,11 +9,13 @@ angular.module('apiiSimFrontofficeApp').controller(
 		'HomeCtrl',
 		[
 				'$scope',
+				'$rootScope',
 				'$log',
 				'Locale',
 				'$window',
 				'$timeout',
-				function($scope, $log, Locale, $window, $timeout) {
+				'Config',
+				function($scope, $rootScope, $log, Locale, $window, $timeout, Config) {
 
 					$scope.groups = [ {
 						open : true
@@ -22,8 +24,6 @@ angular.module('apiiSimFrontofficeApp').controller(
 					} ];
 
 					$scope.disabled = true;
-
-					Locale.setLocale('fr');
 
 					$scope.$watch('model.responses.starting', function(value) {
 						if (value != null) {
@@ -52,63 +52,18 @@ angular.module('apiiSimFrontofficeApp').controller(
 					});
 
 					$scope.print = function() {
-						var element = angular.element('#print-detail')[0];
-						var html = '<html><head>' + '<link rel="stylesheet" type="text/css" media="print" href="styles/main.css"/>'
-								+ '</head><body>' + element.innerHTML + '</body></html>';
-
-						var iframe = document.createElement('iframe');
-						document.body.appendChild(iframe);
-						iframe.style.visibility = "hidden";
-						iframe.style.position = "fixed";
-						iframe.style.lef = "0";
-						iframe.style.top = "0";
-						iframe.style.width = "100%";
-						iframe.style.height = "100%";
-						iframe.style.background = '#FFFFFF';
-						iframe.onload = print;
-
-						iframe.contentDocument.open();
-						iframe.contentDocument.write(html);
-						iframe.contentDocument.close();
+						$.print("#map", {append: "#print-detail"});						
 					};
 
-					function close() {
-						var iframe = this.__container__;
-						$timeout(function() {
-							document.body.removeChild(iframe);
-						}, 1000);
+					
+					function initialize() {
+						Locale.setLocale('fr');
+						Config.getConfig().then(function(result) {
+							$rootScope.config = result;
+							$scope.contact = result.contact;
+						})
 					}
 
-					function print() {
-						this.contentWindow.__container__ = this;
-						this.contentWindow.onbeforeunload = close;
-						this.contentWindow.onafterprint = close;
-						this.contentWindow.focus(); // Required for IE
-						this.contentWindow.print();
-						if(getBrowserName() == "chrome"){
-							document.body.removeChild(this)
-						}
-					}
+					initialize();
 
-					function getBrowserName() {
-
-						var userAgent = $window.navigator.userAgent;
-						var browsers = {
-							chrome : /chrome/i,
-							safari : /safari/i,
-							firefox : /firefox/i,
-							ie : /internet explorer/i
-						};
-
-						for ( var key in browsers) {
-							if (browsers[key].test(userAgent)) {
-								return key;
-							}
-						}
-						;
-
-						return 'unknown';
-					}
-
-					$log.info('[DSU] browser : ' + getBrowserName());
 				} ]);

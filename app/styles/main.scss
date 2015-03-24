@@ -1,5 +1,9 @@
 @media print {
+	html {padding: 0px!important;}
 	body {-webkit-print-color-adjust: exact;}
+	.leaflet-control-container {
+		display: none;
+	}
 }
 
 @import "header";

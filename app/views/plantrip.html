@@ -98,109 +98,163 @@
 					['DepartureTime','ArrivalTime'])}}</span>
 			</div>
 		</div>
-		<div id="parameters" class="panel panel-default" collapse="collapsed" ng-init="collapsed = true">
+		<div id="parameters" class="panel panel-default" collapse="collapsed"
+			ng-init="collapsed = true"
+		>
 			<div class="panel-heading">
 				<span class="panel-title" translate>Parameters</span>
 			</div>
 			<div class="panel-body">
 				<div id="transportMode" class="form-group">
-					<div class="btn-group" dropdown>
-						<button type="button" class="btn btn-default" translate>TransportMode</button>
-						<button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle>
-							<span class="caret"></span>
-						</button>
-			
-						<ul class="dropdown-menu">
-							<li>
-								<input id="ALL" type="checkbox"
-									ng-checked="isItemSelected($storage.transportMode, 'ALL')"
-									ng-click="onTransportModeChange($storage.transportMode, 'ALL')"
-								>
-								<label for="ALL" translate>ALL</label>
-							</li>
-							</li>
-							<li>
-								<input id="BUS" type="checkbox"
-									ng-checked="isItemSelected($storage.transportMode, 'BUS')"
-									ng-click="onTransportModeChange($storage.transportMode, 'BUS')"
-								>
-								<label for="BUS" translate>BUS</label>
-							</li>
-							</li>
-							<li>
-								<input id="TRAM" type="checkbox"
-									ng-checked="isItemSelected($storage.transportMode, 'TRAM')"
-									ng-click="onTransportModeChange($storage.transportMode, 'TRAM')"
-								>
-								<label for="TRAM" translate>TRAM</label>
-							</li>
-							</li>
-							<li>
-								<input id="RAIL" type="checkbox"
-									ng-checked="isItemSelected($storage.transportMode, 'RAIL')"
-									ng-click="onTransportModeChange($storage.transportMode, 'RAIL')"
-								>
-								<label for="RAIL" translate>RAIL</label>
-							</li>
-							</li>
-							<li>
-								<input id="METRO" type="checkbox"
-									ng-checked="isItemSelected($storage.transportMode, 'METRO')"
-									ng-click="onTransportModeChange($storage.transportMode, 'METRO')"
-								>
-								<label for="METRO" translate>METRO</label>
-							</li>
-							</li>
-							<li>
-								<input id="AIR" type="checkbox"
-									ng-checked="isItemSelected($storage.transportMode, 'AIR')"
-									ng-click="onCheckBoxChange($storage.transportMode, 'AIR')"
-								>
-								<label for="AIR" translate>AIR</label>
-							</li>
-							</li>
-							<li>
-								<input id="WATER" type="checkbox"
-									ng-checked="isItemSelected($storage.transportMode, 'WATER')"
-									ng-click="onCheckBoxChange($storage.transportMode, 'WATER')"
-								>
-								<label for="WATER" translate>WATER</label>
-							</li>
-							</li>
-							<li>
-								<input id="CABLE" type="checkbox"
-									ng-checked="isItemSelected($storage.transportMode, 'CABLE')"
-									ng-click="onTransportModeChange($storage.transportMode, 'CABLE')"
-								>
-								<label for="CABLE" translate>CABLE</label>
-							</li>
-							</li>
-							<li>
-								<input id="TAXI" type="checkbox"
-									ng-checked="isItemSelected($storage.transportMode, 'TAXI')"
-									ng-click="onTransportModeChange($storage.transportMode, 'TAXI')"
-								>
-								<label for="TAXI" translate>TAXI</label>
-							</li>
-							</li>
-							<li>
-								<input id="BIKE" type="checkbox"
-									ng-checked="isItemSelected($storage.transportMode, 'BIKE')"
-									ng-click="onTransportModeChange($storage.transportMode, 'BIKE')"
-								>
-								<label for="BIKE" translate>BIKE</label>
-							</li>
-							</li>
-							<li>
-								<input id="CAR" type="checkbox"
-									ng-checked="isItemSelected($storage.transportMode, 'CAR')"
-									ng-click="onTransportModeChange($storage.transportMode, 'CAR')"
-								>
-								<label for="CAR" translate>CAR</label>
-							</li>
-							</li>
-						</ul>
+					<label for="transportMode" translate>TransportMode</label>
+					<div class="form-group">
+						<input id="ALL" type="checkbox"
+							ng-checked="isItemSelected($storage.transportMode, 'ALL')"
+							ng-click="onTransportModeChange($storage.transportMode, 'ALL')"
+						>
+						<label for="ALL" translate>ALL</label>
+						<input id="BUS" type="checkbox"
+							ng-checked="isItemSelected($storage.transportMode, 'BUS')"
+							ng-click="onTransportModeChange($storage.transportMode, 'BUS')"
+						>
+						<label for="BUS" translate>BUS</label>
+						<input id="TRAM" type="checkbox"
+							ng-checked="isItemSelected($storage.transportMode, 'TRAM')"
+							ng-click="onTransportModeChange($storage.transportMode, 'TRAM')"
+						>
+						<label for="TRAM" translate>TRAM</label>
+						<input id="AIR" type="checkbox"
+							ng-checked="isItemSelected($storage.transportMode, 'AIR')"
+							ng-click="onTransportModeChange($storage.transportMode, 'AIR')"
+						>
+						<label for="AIR" translate>AIR</label>
+						<input id="RAIL" type="checkbox"
+							ng-checked="isItemSelected($storage.transportMode, 'RAIL')"
+							ng-click="onTransportModeChange($storage.transportMode, 'RAIL')"
+						>						
+						<label for="RAIL" translate>RAIL</label>
+						<input id="METRO" type="checkbox"
+							ng-checked="isItemSelected($storage.transportMode, 'METRO')"
+							ng-click="onTransportModeChange($storage.transportMode, 'METRO')"
+						>
+						<label for="METRO" translate>METRO</label>
+						<input id="WATER" type="checkbox"
+							ng-checked="isItemSelected($storage.transportMode, 'WATER')"
+							ng-click="onTransportModeChange($storage.transportMode, 'WATER')"
+						>
+						<label for="WATER" translate>WATER</label>
+						<input id="CABLE" type="checkbox"
+							ng-checked="isItemSelected($storage.transportMode, 'CABLE')"
+							ng-click="onTransportModeChange($storage.transportMode, 'CABLE')"
+						>
+						<label for="CABLE" translate>CABLE</label>
+						<input id="TAXI" type="checkbox"
+							ng-checked="isItemSelected($storage.transportMode, 'TAXI')"
+							ng-click="onTransportModeChange($storage.transportMode, 'TAXI')"
+						>
+						<label for="TAXI" translate>TAXI</label>
+						<input id="CAR" type="checkbox"
+							ng-checked="isItemSelected($storage.transportMode, 'CAR')"
+							ng-click="onTransportModeChange($storage.transportMode, 'CAR')"
+						>
+						<label for="CAR" translate>CAR</label>
 					</div>
+					<!-- 					<div class="btn-group" dropdown> -->
+					<!-- 						<button type="button" class="btn btn-default" translate>TransportMode</button> -->
+					<!-- 						<button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle> -->
+					<!-- 							<span class="caret"></span> -->
+					<!-- 						</button> -->
+					<!-- 						<ul class="dropdown-menu"> -->
+					<!-- 							<li> -->
+					<!-- 								<input id="ALL" type="checkbox" -->
+					<!-- 									ng-checked="isItemSelected($storage.transportMode, 'ALL')" -->
+					<!-- 									ng-click="onTransportModeChange($storage.transportMode, 'ALL')" -->
+					<!-- 								> -->
+					<!-- 								<label for="ALL" translate>ALL</label> -->
+					<!-- 							</li> -->
+					<!-- 							</li> -->
+					<!-- 							<li> -->
+					<!-- 								<input id="BUS" type="checkbox" -->
+					<!-- 									ng-checked="isItemSelected($storage.transportMode, 'BUS')" -->
+					<!-- 									ng-click="onTransportModeChange($storage.transportMode, 'BUS')" -->
+					<!-- 								> -->
+					<!-- 								<label for="BUS" translate>BUS</label> -->
+					<!-- 							</li> -->
+					<!-- 							</li> -->
+					<!-- 							<li> -->
+					<!-- 								<input id="TRAM" type="checkbox" -->
+					<!-- 									ng-checked="isItemSelected($storage.transportMode, 'TRAM')" -->
+					<!-- 									ng-click="onTransportModeChange($storage.transportMode, 'TRAM')" -->
+					<!-- 								> -->
+					<!-- 								<label for="TRAM" translate>TRAM</label> -->
+					<!-- 							</li> -->
+					<!-- 							</li> -->
+					<!-- 							<li> -->
+					<!-- 								<input id="RAIL" type="checkbox" -->
+					<!-- 									ng-checked="isItemSelected($storage.transportMode, 'RAIL')" -->
+					<!-- 									ng-click="onTransportModeChange($storage.transportMode, 'RAIL')" -->
+					<!-- 								> -->
+					<!-- 								<label for="RAIL" translate>RAIL</label> -->
+					<!-- 							</li> -->
+					<!-- 							</li> -->
+					<!-- 							<li> -->
+					<!-- 								<input id="METRO" type="checkbox" -->
+					<!-- 									ng-checked="isItemSelected($storage.transportMode, 'METRO')" -->
+					<!-- 									ng-click="onTransportModeChange($storage.transportMode, 'METRO')" -->
+					<!-- 								> -->
+					<!-- 								<label for="METRO" translate>METRO</label> -->
+					<!-- 							</li> -->
+					<!-- 							</li> -->
+					<!-- 							<li> -->
+					<!-- 								<input id="AIR" type="checkbox" -->
+					<!-- 									ng-checked="isItemSelected($storage.transportMode, 'AIR')" -->
+					<!-- 									ng-click="onCheckBoxChange($storage.transportMode, 'AIR')" -->
+					<!-- 								> -->
+					<!-- 								<label for="AIR" translate>AIR</label> -->
+					<!-- 							</li> -->
+					<!-- 							</li> -->
+					<!-- 							<li> -->
+					<!-- 								<input id="WATER" type="checkbox" -->
+					<!-- 									ng-checked="isItemSelected($storage.transportMode, 'WATER')" -->
+					<!-- 									ng-click="onCheckBoxChange($storage.transportMode, 'WATER')" -->
+					<!-- 								> -->
+					<!-- 								<label for="WATER" translate>WATER</label> -->
+					<!-- 							</li> -->
+					<!-- 							</li> -->
+					<!-- 							<li> -->
+					<!-- 								<input id="CABLE" type="checkbox" -->
+					<!-- 									ng-checked="isItemSelected($storage.transportMode, 'CABLE')" -->
+					<!-- 									ng-click="onTransportModeChange($storage.transportMode, 'CABLE')" -->
+					<!-- 								> -->
+					<!-- 								<label for="CABLE" translate>CABLE</label> -->
+					<!-- 							</li> -->
+					<!-- 							</li> -->
+					<!-- 							<li> -->
+					<!-- 								<input id="TAXI" type="checkbox" -->
+					<!-- 									ng-checked="isItemSelected($storage.transportMode, 'TAXI')" -->
+					<!-- 									ng-click="onTransportModeChange($storage.transportMode, 'TAXI')" -->
+					<!-- 								> -->
+					<!-- 								<label for="TAXI" translate>TAXI</label> -->
+					<!-- 							</li> -->
+					<!-- 							</li> -->
+					<!-- 							<li> -->
+					<!-- 								<input id="BIKE" type="checkbox" -->
+					<!-- 									ng-checked="isItemSelected($storage.transportMode, 'BIKE')" -->
+					<!-- 									ng-click="onTransportModeChange($storage.transportMode, 'BIKE')" -->
+					<!-- 								> -->
+					<!-- 								<label for="BIKE" translate>BIKE</label> -->
+					<!-- 							</li> -->
+					<!-- 							</li> -->
+					<!-- 							<li> -->
+					<!-- 								<input id="CAR" type="checkbox" -->
+					<!-- 									ng-checked="isItemSelected($storage.transportMode, 'CAR')" -->
+					<!-- 									ng-click="onTransportModeChange($storage.transportMode, 'CAR')" -->
+					<!-- 								> -->
+					<!-- 								<label for="CAR" translate>CAR</label> -->
+					<!-- 							</li> -->
+					<!-- 							</li> -->
+					<!-- 						</ul> -->
+					<!-- 					</div> -->
 				</div>
 				<div id="departureAccessMode" class="form-group">
 					<label for="departureAccessMode" translate>DepartureAccessMode</label>
@@ -255,7 +309,8 @@
 		</div>
 		<div class="form-group row">
 			<div id="config" class="pull-left">
-				<a class="btn btn-link" title="{{ 'Parameters' | translate}} "ng-click="collapsed = !collapsed"
+				<a class="btn btn-link" title="{{ 'Parameters' | translate}} "
+					ng-click="collapsed = !collapsed"
 				>{{ 'Parameters' | translate}} </a>
 			</div>
 			<div class="pull-right">

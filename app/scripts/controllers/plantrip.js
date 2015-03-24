@@ -140,6 +140,7 @@ angular.module('apiiSimFrontofficeApp').controller(
 								array.splice(index, 1);
 							}
 						}
+						$log.info('[DSU] Transport Mode : ' + JSON.stringify(array));
 					}
 
 					$scope.onAccessModeChange = function(array, value) {

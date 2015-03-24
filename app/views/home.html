@@ -1,5 +1,6 @@
 <div id="home" ng-controller="HomeCtrl">
 	<a id="contact" href="contact.html" translate>Contact</a>
+	<!-- 	<a id="contact" target="_blank"  href="{{contact}}" translate>Contact</a> -->
 	<div id="locale" class="btn-group" dropdown>
 		<button type="button" class="btn btn-default dropdown-toggle"
 			title="{{ 'Locale' | translate}}" dropdown-toggle
@@ -46,8 +47,11 @@
 		</span> </accordion-heading>
 		<div>
 			<div ui-view="viewB"></div>
-			<div>
-				<div id="print-detail" class="panel panel-default" ng-controller="DetailCtrl" ng-show="data">
+			<div id="print-detail">
+			
+				<div  class="panel panel-default"
+					ng-controller="DetailCtrl" ng-show="data"
+				>
 					<div class="panel-heading">
 						<span class="panel-title" translate>Detail</span>
 						<span class="label label-default">{{index +1}}</span>
