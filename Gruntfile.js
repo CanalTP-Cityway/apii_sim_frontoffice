@@ -10,6 +10,7 @@
 module.exports = function(grunt) {
 
 	grunt.loadNpmTasks('grunt-angular-gettext');
+  grunt.loadNpmTasks('grunt-contrib-compress');
 
 	// Load grunt tasks automatically
 	require('load-grunt-tasks')(grunt);
@@ -25,6 +26,19 @@ module.exports = function(grunt) {
 
 	// Define the configuration for all the tasks
 	grunt.initConfig({
+
+		compress: {
+			main: {
+				options: {
+					archive: 'dist.tgz',
+					mode: 'tgz'
+				},
+				expand: true,
+				cwd: 'dist/',
+				src: ['**/*'],
+				dest: '/'
+			}
+		},
 
 		nggettext_extract : {
 			pot : {
