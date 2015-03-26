@@ -52,14 +52,16 @@ angular.module('apiiSimFrontofficeApp').service('Sim',
 				var self = this;
 				self.clear();
 
-				// this.url = 'ws://' + $location.host() + ':'
-				// + $location.port() + '/planner';
-				this.url = 'wss://' + $location.host() + '/planner';
+				 this.url = 'ws://' + $location.host() + ':'
+				 + $location.port() + '/planner';
+				// this.url = 'wss://' + $location.host() + '/planner';
 
 				if ($rootScope.debug) {
-					this.url = "wss://www.apii-sim.fr/planner"
+					// this.url = "wss://www.apii-sim.fr/planner"
 					// this.url =
 					// "wss://apiisim-mtm.cityway.fr/planner"
+						
+					this.url = 'ws://mobi.alpinfonet.org/planner';
 				}
 
 				this.deferred = $q.defer();

@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.3\n"
+"X-Generator: Poedit 1.7.5\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: app/views/plantrip.html:165 dist/views/plantrip.html:1
@@ -108,11 +108,11 @@ msgstr "No solution"
 
 #: app/views/plantrip.html:45 dist/views/plantrip.html:1
 msgid "EnterArrival"
-msgstr "Fill your start location"
+msgstr "Fill your end location"
 
 #: app/views/plantrip.html:23 dist/views/plantrip.html:1
 msgid "EnterDeparture"
-msgstr "Fill your end location"
+msgstr "Fill your start location"
 
 #: app/views/detail.html:41 dist/views/detail.html:1
 msgid "Line"

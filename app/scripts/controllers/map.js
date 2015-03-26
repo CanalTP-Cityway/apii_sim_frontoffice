@@ -345,8 +345,8 @@ angular.module('apiiSimFrontofficeApp').controller(
 						var name = departure.TripStopPlace.Name;
 						var city_name = (departure.TripStopPlace.CityName) ? departure.TripStopPlace.CityName : "";
 						// var line = (section.Line) ? section.Line.Name : "";
-						var line = (section.Line) ? section.Line.Number : "";
-						var direction = section.StopHeadSign;
+						var line = (section.Line) ? section.Line.Number+ ' - '  + section.Line.Name: '';						
+						var direction = (section.StopHeadSign) ? section.StopHeadSign  : '';
 
 						var marker = {
 							type : 'div',
@@ -392,9 +392,12 @@ angular.module('apiiSimFrontofficeApp').controller(
 						var header = "";
 
 						if (mode != 'foot') {
-							var text = gettextCatalog.getString("Line") + ' ' + line + ' - '
-									+ gettextCatalog.getString("Direction") + ' ' + direction;
-							header = '<div class="popup-header"><i class="' + icon + '"></i>' + text + '</div>';
+							var text =  + ' - '
+									;
+							header = '<div class="popup-header">' 							
+								+ '<div>' 	+ '<i class="' + icon + '"></i>'  + gettextCatalog.getString("Line") + ' ' + line  + '</div>'
+								+ '<div>' + gettextCatalog.getString("Direction") + ' ' + direction + '</div>' 
+								+ '</div>';	
 						}
 
 						var arrivalText = gettextCatalog.getString("Arrival") + ' ' + arrival;
