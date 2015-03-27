@@ -22,18 +22,35 @@ angular.module('apiiSimFrontofficeApp').controller(
 					$scope.setDeparture = function(lng, lat) {
 						leafletData.getMap().then(function(map) {
 							map.closePopup();
-						});
-						$rootScope.model.departure.lng = lng;
-						$rootScope.model.departure.lat = lat;
+						});						
+						$rootScope.model.departure.lng = parseFloat(lng);;
+						$rootScope.model.departure.lat = parseFloat(lat);;
 					}
 
 					$scope.setArrival = function(lng, lat) {
 						leafletData.getMap().then(function(map) {
 							map.closePopup();
 						});
-						$rootScope.model.arrival.lng = lng;
-						$rootScope.model.arrival.lat = lat;
+						$rootScope.model.arrival.lng = parseFloat(lng);
+						$rootScope.model.arrival.lat = parseFloat(lat);
 					}
+
+					$scope.$watch('model.departure', function(value) {
+						if (value != undefined && $scope.markers['departure'] == undefined) {
+							
+							if( !(isNaN(value.lat) || isNaN(value.lng)) ){											
+								$scope.markers['departure'] = value;
+							}
+						}
+					}, true);
+					
+					$scope.$watch('model.arrival', function(value) {
+						if (value != undefined && $scope.markers['arrival'] == undefined) {
+							if( !(isNaN(value.lat) || isNaN(value.lng)) ){
+								$scope.markers['arrival'] = value;
+							}							
+						}
+					}, true);
 
 					$scope.$on('leafletDirectivePath.click', function(event, data) {
 						if (data.pathName.substr(0, 2) === 'p_') {
@@ -55,10 +72,6 @@ angular.module('apiiSimFrontofficeApp').controller(
 								popup.openOn(map);
 							}
 						});
-					});
-
-					$scope.$on('leafletDirectivePath.mouseout', function(event, data) {
-
 					});
 
 					$scope.$on('leafletDirectiveMap.contextmenu', function(event, data) {
@@ -152,6 +165,7 @@ angular.module('apiiSimFrontofficeApp').controller(
 							zIndexOffset : 1000,
 							draggable : true
 						});
+					
 
 						angular.extend($rootScope.model.arrival, {
 							icon : local_icons.marker_red,
@@ -159,6 +173,7 @@ angular.module('apiiSimFrontofficeApp').controller(
 							zIndexOffset : 1000,
 							draggable : true
 						});
+						
 
 						angular.extend($scope, {
 							center : {
@@ -174,12 +189,16 @@ angular.module('apiiSimFrontofficeApp').controller(
 								path : {}
 							},
 							icons : local_icons,
-							markers : {},
+							markers : {
+							// arrival : $rootScope.model.arrival,
+							// departure : $rootScope.model.departure
+							},
 							paths : {},
 							events : {
 								path : {
 									enable : [ 'click', 'contextmenu' ],
-									// enable : [ 'click', 'contextmenu', 'mouseover', 'mouseout' ],
+									// enable : [ 'click', 'contextmenu',
+									// 'mouseover', 'mouseout' ],
 									logic : 'emit'
 								}
 							},
@@ -187,12 +206,10 @@ angular.module('apiiSimFrontofficeApp').controller(
 							detail : {}
 						});
 
-						$scope.markers['arrival'] = $rootScope.model.arrival;
-						$scope.markers['departure'] = $rootScope.model.departure;
-
 						Config.getConfig().then(function(result) {
-							leafletData.getMap().then(function(map) {							
-								map.fitBounds(result.bounds)
+							leafletData.getMap().then(function(map) {
+								map.fitBounds(result.bounds);
+
 							});
 						});
 					}
@@ -345,8 +362,8 @@ angular.module('apiiSimFrontofficeApp').controller(
 						var name = departure.TripStopPlace.Name;
 						var city_name = (departure.TripStopPlace.CityName) ? departure.TripStopPlace.CityName : "";
 						// var line = (section.Line) ? section.Line.Name : "";
-						var line = (section.Line) ? section.Line.Number+ ' - '  + section.Line.Name: '';						
-						var direction = (section.StopHeadSign) ? section.StopHeadSign  : '';
+						var line = (section.Line) ? section.Line.Number + ' - ' + section.Line.Name : '';
+						var direction = (section.StopHeadSign) ? section.StopHeadSign : '';
 
 						var marker = {
 							type : 'div',
@@ -392,12 +409,10 @@ angular.module('apiiSimFrontofficeApp').controller(
 						var header = "";
 
 						if (mode != 'foot') {
-							var text =  + ' - '
-									;
-							header = '<div class="popup-header">' 							
-								+ '<div>' 	+ '<i class="' + icon + '"></i>'  + gettextCatalog.getString("Line") + ' ' + line  + '</div>'
-								+ '<div>' + gettextCatalog.getString("Direction") + ' ' + direction + '</div>' 
-								+ '</div>';	
+							var text = +' - ';
+							header = '<div class="popup-header">' + '<div>' + '<i class="' + icon + '"></i>'
+									+ gettextCatalog.getString("Line") + ' ' + line + '</div>' + '<div>'
+									+ gettextCatalog.getString("Direction") + ' ' + direction + '</div>' + '</div>';
 						}
 
 						var arrivalText = gettextCatalog.getString("Arrival") + ' ' + arrival;

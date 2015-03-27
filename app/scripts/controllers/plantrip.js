@@ -21,6 +21,7 @@ angular.module('apiiSimFrontofficeApp').controller(
 				function($scope, $rootScope, $log, $sessionStorage, $http, $location, $locale, gettextCatalog, Sim, Config) {
 
 					$scope.lang = 'fr';
+					$scope.minDate = new Date();
 
 					// 'http://open.mapquestapi.com/nominatim/v1/search'
 					// 'http://nominatim.openstreetmap.org/search'
@@ -194,6 +195,22 @@ angular.module('apiiSimFrontofficeApp').controller(
 							}
 						}).then(callback);
 					};
+
+					$scope.arrivalDepartureTimeHasError = function(name, fields) {
+						var now = new Date();
+						var d1 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0);												
+						if ($scope.$storage.arrivalDepartureDate) {
+							var value = moment($scope.$storage.arrivalDepartureDate).toDate();
+							var d2 = new Date(value.getFullYear(), value.getMonth(), value.getDate(), 0, 0, 0, 0);
+							if (d2 - d1 < 0) {
+								return true;
+							}
+						} else {
+							return true;
+						}
+
+						return $scope.hasError(name, fields);
+					}
 
 					$scope.hasError = function(name, fields) {
 						if (fields === undefined) {

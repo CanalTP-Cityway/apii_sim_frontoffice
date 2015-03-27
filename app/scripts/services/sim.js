@@ -8,12 +8,12 @@ angular.module('apiiSimFrontofficeApp').service('Sim',
 		[ '$rootScope', '$location', '$q', '$log', '$timeout', function($rootScope, $location, $q, $log, $timeout) {
 			var DEFAULT = {
 				departure : {
-					lng : 0,
-					lat : 0
+					lng :  parseFloat(0),
+					lat : parseFloat(0)
 				},
 				arrival : {
-					lng : 0,
-					lat : 0
+					lng : parseFloat(0),
+					lat : parseFloat(0)
 				},
 				plantrip : {
 					request : null,

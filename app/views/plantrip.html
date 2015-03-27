@@ -69,12 +69,13 @@
 			<div class="table">
 				<div class="table-row;">
 					<div id="arrivalDepartureDateTime" class="table-cell"
-						ng-class="{ 'has-error': hasError('ArrivalDepartureTime' , ['DepartureTime','ArrivalTime']) }"
+						ng-class="{ 'has-error': arrivalDepartureTimeHasError('ArrivalDepartureTime' , ['DepartureTime','ArrivalTime']) }"
 					>
 						<p class="input-group">
 							<input type="text" class="form-control"
 								ng-model="$storage.arrivalDepartureDate" datepicker-popup="dd/MM/yyyy"
 								is-open="opened" name="ArrivalDepartureTime"
+								min-date= "minDate" 
 								current-text="{{ 'Today' | translate}}"
 								clear-text="{{ 'Clear' | translate}}"
 								close-text="{{ 'Close' | translate}}" required
