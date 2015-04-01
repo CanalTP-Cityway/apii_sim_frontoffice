@@ -376,7 +376,6 @@ angular.module('apiiSimFrontofficeApp').controller(
 						$scope.opened = false;
 						$scope.$storage = $sessionStorage.$default(DEFAULT);
 						decodeURL();
-						$rootScope.debug = ($location.port() == 9000) ? true : false;
 					}
 
 					initialize();

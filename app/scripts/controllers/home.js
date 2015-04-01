@@ -14,8 +14,9 @@ angular.module('apiiSimFrontofficeApp').controller(
 				'Locale',
 				'$window',
 				'$timeout',
+				'$location',
 				'Config',
-				function($scope, $rootScope, $log, Locale, $window, $timeout, Config) {
+				function($scope, $rootScope, $log, Locale, $window, $timeout, $location, Config) {
 
 					$scope.groups = [ {
 						open : true
@@ -30,7 +31,7 @@ angular.module('apiiSimFrontofficeApp').controller(
 							$scope.groups[1].open = true;
 						}
 					});
-
+					
 					$scope.setLocale = function(locale) {
 						Locale.setLocale(locale);
 					}
@@ -60,8 +61,8 @@ angular.module('apiiSimFrontofficeApp').controller(
 						Locale.setLocale('fr');
 						Config.getConfig().then(function(result) {
 							$rootScope.config = result;
-							$scope.contact = result.contact;
-						})
+						});
+						$rootScope.debug = ($location.port() == 9000) ? true : false;
 					}
 
 					initialize();

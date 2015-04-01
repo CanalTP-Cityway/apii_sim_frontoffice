@@ -139,6 +139,11 @@ angular.module('apiiSimFrontofficeApp').controller(
 
 					function initialize() {
 
+						var url = "http://{s}.tile.osm.org/{z}/{x}/{y}.png";
+						if ($rootScope.debug) {
+							url = "http://{s}.www.toolserver.org/tiles/bw-mapnik/{z}/{x}/{y}.png";
+						}
+						
 						var local_icons = {
 							default_icon : {},
 							marker_green : {
@@ -174,6 +179,7 @@ angular.module('apiiSimFrontofficeApp').controller(
 							draggable : true
 						});
 						
+						
 
 						angular.extend($scope, {
 							center : {
@@ -182,7 +188,7 @@ angular.module('apiiSimFrontofficeApp').controller(
 								zoom : 6
 							},
 							defaults : {
-								tileLayer : "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
+								tileLayer : url,
 								maxZoom : 19,
 								zoomControl : true,
 								zoomControlPosition : 'topright',
