@@ -107,8 +107,7 @@ angular.module('apiiSimFrontofficeApp').controller(
 
 					$scope.$watch('model.departure', function(value) {
 						if (!isNaN(value.lng) && !isNaN(value.lat)) {
-
-							if ($scope.$storage.departurePlace == undefined || value.lng != $scope.$storage.departurePlace.lng
+							if ($scope.$storage.departurePlace == undefined || value.lng != $scope.$storage.departurePlace.lon
 									|| value.lat != $scope.$storage.departurePlace.lat) {
 								$scope.getReverseAddresses(value.lng, value.lat, function(result) {
 									$scope.$storage.departurePlace = result.data;
@@ -120,8 +119,7 @@ angular.module('apiiSimFrontofficeApp').controller(
 
 					$scope.$watch('model.arrival', function(value) {
 						if (!isNaN(value.lng) && !isNaN(value.lat)) {
-
-							if ($scope.$storage.arrivalPlace == undefined || value.lng != $scope.$storage.arrivalPlace.lng
+							if ($scope.$storage.arrivalPlace == undefined || value.lng != $scope.$storage.arrivalPlace.lon
 									|| value.lat != $scope.$storage.arrivalPlace.lat) {
 								$scope.getReverseAddresses(value.lng, value.lat, function(result) {
 									$scope.$storage.arrivalPlace = result.data;
@@ -200,9 +198,11 @@ angular.module('apiiSimFrontofficeApp').controller(
 						var now = new Date();
 						var d1 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0);												
 						if ($scope.$storage.arrivalDepartureDate) {
+							// var value = $scope.$storage.arrivalDepartureDate;							
 							var value = moment($scope.$storage.arrivalDepartureDate).toDate();
+							// console.log(value);
 							var d2 = new Date(value.getFullYear(), value.getMonth(), value.getDate(), 0, 0, 0, 0);
-							if (d2 - d1 < 0) {
+							if (d2.getTime() - d1.getTime()  < 0) {
 								return true;
 							}
 						} else {
@@ -374,7 +374,9 @@ angular.module('apiiSimFrontofficeApp').controller(
 							$scope.config = result;
 						})
 						$scope.opened = false;
-						$scope.$storage = $sessionStorage.$default(DEFAULT);
+						$scope.$storage = $sessionStorage.$default(DEFAULT);		
+						$scope.$storage.arrivalDepartureDate = new Date($scope.$storage.arrivalDepartureDate);
+						$scope.$storage.arrivalDepartureTime = new Date($scope.$storage.arrivalDepartureTime);
 						decodeURL();
 					}
 

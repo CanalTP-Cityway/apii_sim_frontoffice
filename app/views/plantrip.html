@@ -75,7 +75,10 @@
 							<input type="text" class="form-control"
 								ng-model="$storage.arrivalDepartureDate" datepicker-popup="dd/MM/yyyy"
 								is-open="opened" name="ArrivalDepartureTime"
-								min-date= "minDate" 
+								min-date="minDate" 
+								format-day="dd"
+								format-month="MM"
+								format-year="yyyy"
 								current-text="{{ 'Today' | translate}}"
 								clear-text="{{ 'Clear' | translate}}"
 								close-text="{{ 'Close' | translate}}" required
