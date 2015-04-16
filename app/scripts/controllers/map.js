@@ -142,8 +142,10 @@ angular.module('apiiSimFrontofficeApp').controller(
 							$scope.paths[i].color = $scope.paths[i].stroke_color;
 							$scope.paths[i].weight = $scope.paths[i].stroke_weight;
 						}
-						$scope.paths['p_' + index].color = '#777';
-						$scope.paths['p_' + index].weight = 7;
+						if ($scope.paths['p_' + index]) {
+							$scope.paths['p_' + index].color = '#777';
+							$scope.paths['p_' + index].weight = 7;
+						}
 
 					});
 
