@@ -6,7 +6,7 @@
  * @description # DetailCtrl Controller of the apiiSimFrontofficeApp
  */
 angular.module('apiiSimFrontofficeApp').controller('DetailCtrl',
-		[ '$scope', '$rootScope', '$log', '$window', function($scope, $rootScope, $log, $window) {
+		[ '$scope', '$rootScope', '$log', function($scope, $rootScope, $log) {
 
 			$scope.$on('solution', function(event, index, data) {
 				$scope.index = index;
@@ -17,39 +17,11 @@ angular.module('apiiSimFrontofficeApp').controller('DetailCtrl',
 				$scope.onSelect(index);
 			});
 
-			$scope.getWindowDimensions = function() {
-
-				var element = angular.element('#map')[0];
-				var height = element.offsetHeight;
-				var width = element.offsetWidth;
-				
-				return {
-						'h' : height,
-						'w' : width
-				};
-				
-				// var w = angular.element($window);
-				// return {
-				// 'h' : w.height(),
-				// 'w' : w.width()
-				// };
-				
-			};	
-
-			
-
-//			$scope.$watch($scope.getWindowDimensions, function(value) {
-//				var element = angular.element('#detail')[0];
-//				var max = value.h - element.offsetHeight - 10;
-//				element.style.maxHeight = max + 'px';
-//				$log.info("[DSU] max : " + JSON.stringify(max));
-//			}, true);
-
 			$scope.onSelect = function(index) {
 				$scope.selected = index;
 				var value = $scope.data.body.PlanTripNotificationResponseType.ComposedTrip.sections[index];
 				$rootScope.$broadcast('detail', index, value);
-			}
+			};
 
 			$scope.getWaiting = function(index) {
 				var result = 0;
@@ -58,7 +30,7 @@ angular.module('apiiSimFrontofficeApp').controller('DetailCtrl',
 				var current = array[index];
 				var next = null;
 				if (index + 1 < array.length) {
-					var next = array[index + 1];
+					next = array[index + 1];
 				}
 
 				var arrival = null;
@@ -83,11 +55,11 @@ angular.module('apiiSimFrontofficeApp').controller('DetailCtrl',
 				}
 
 				return result;
-			}
+			};
 
 			$scope.getIconClass = function(key) {
 				return Constant.toIconClass(key);
-			}
+			};
 
 			$scope.getElapsedTime = function(index) {
 				var result = 0;
@@ -97,7 +69,7 @@ angular.module('apiiSimFrontofficeApp').controller('DetailCtrl',
 				var current = array[index];
 				var next = null;
 				if (index + 1 < array.length) {
-					var next = array[index + 1];
+					next = array[index + 1];
 				}
 
 				var departure = null;
@@ -125,5 +97,5 @@ angular.module('apiiSimFrontofficeApp').controller('DetailCtrl',
 				}
 
 				return result;
-			}
+			};
 		} ]);

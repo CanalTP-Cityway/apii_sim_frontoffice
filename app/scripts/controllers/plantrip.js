@@ -32,7 +32,7 @@ angular.module('apiiSimFrontofficeApp').controller(
 						departurePlace : undefined,
 						arrival : '',
 						arrivalPlace : undefined,
-						arrivalDepartureTimeConstraint : "false",
+						arrivalDepartureTimeConstraint : 'false',
 						arrivalDepartureDate : new Date(),
 						arrivalDepartureTime : new Date(),
 						accessibilityConstraint : false,
@@ -107,8 +107,9 @@ angular.module('apiiSimFrontofficeApp').controller(
 
 					$scope.$watch('model.departure', function(value) {
 						if (!isNaN(value.lng) && !isNaN(value.lat)) {
-							if ($scope.$storage.departurePlace == undefined || value.lng != $scope.$storage.departurePlace.lon
-									|| value.lat != $scope.$storage.departurePlace.lat) {
+							if ($scope.$storage.departurePlace === undefined ||
+									value.lng != $scope.$storage.departurePlace.lon ||
+									value.lat != $scope.$storage.departurePlace.lat) {
 								$scope.getReverseAddresses(value.lng, value.lat, function(result) {
 									$scope.$storage.departurePlace = result.data;
 									$scope.$storage.departure = result.data.display_name;
@@ -119,8 +120,9 @@ angular.module('apiiSimFrontofficeApp').controller(
 
 					$scope.$watch('model.arrival', function(value) {
 						if (!isNaN(value.lng) && !isNaN(value.lat)) {
-							if ($scope.$storage.arrivalPlace == undefined || value.lng != $scope.$storage.arrivalPlace.lon
-									|| value.lat != $scope.$storage.arrivalPlace.lat) {
+							if ($scope.$storage.arrivalPlace === undefined ||
+									value.lng != $scope.$storage.arrivalPlace.lon ||
+									value.lat != $scope.$storage.arrivalPlace.lat) {
 								$scope.getReverseAddresses(value.lng, value.lat, function(result) {
 									$scope.$storage.arrivalPlace = result.data;
 									$scope.$storage.arrival = result.data.display_name;
@@ -139,8 +141,7 @@ angular.module('apiiSimFrontofficeApp').controller(
 								array.splice(index, 1);
 							}
 						}
-						$log.info('[DSU] Transport Mode : ' + JSON.stringify(array));
-					}
+					};
 
 					$scope.onAccessModeChange = function(array, value) {
 						var values = Constant.toAccessMode(value);
@@ -152,18 +153,18 @@ angular.module('apiiSimFrontofficeApp').controller(
 								array.splice(index, 1);
 							}
 						}
-					}
+					};
 
 					$scope.isItemSelected = function(array, value) {
-						return (array.indexOf(value) != -1)
-					}
+						return (array.indexOf(value) !== -1);
+					};
 
 					$scope.getAddresses = function(value) {
 
 						var bounds = '-180,90,180,-90';
-						if ($scope.config != undefined) {
-							bounds = $scope.config.bounds[0][1].toString() + ',' + $scope.config.bounds[1][0].toString() + ','
-									+ $scope.config.bounds[1][1].toString() + ',' + $scope.config.bounds[0][0].toString();
+						if ($scope.config !== undefined) {
+							bounds = $scope.config.bounds[0][1].toString() + ',' + $scope.config.bounds[1][0].toString() +
+							',' + $scope.config.bounds[1][1].toString() + ',' + $scope.config.bounds[0][0].toString();
 						}
 
 						return $http.get(URL, {
@@ -196,13 +197,13 @@ angular.module('apiiSimFrontofficeApp').controller(
 
 					$scope.arrivalDepartureTimeHasError = function(name, fields) {
 						var now = new Date();
-						var d1 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0);												
+						var d1 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0);
 						if ($scope.$storage.arrivalDepartureDate) {
-							// var value = $scope.$storage.arrivalDepartureDate;							
+							// var value = $scope.$storage.arrivalDepartureDate;
 							var value = moment($scope.$storage.arrivalDepartureDate).toDate();
 							// console.log(value);
 							var d2 = new Date(value.getFullYear(), value.getMonth(), value.getDate(), 0, 0, 0, 0);
-							if (d2.getTime() - d1.getTime()  < 0) {
+							if (d2.getTime() - d1.getTime() < 0) {
 								return true;
 							}
 						} else {
@@ -210,7 +211,7 @@ angular.module('apiiSimFrontofficeApp').controller(
 						}
 
 						return $scope.hasError(name, fields);
-					}
+					};
 
 					$scope.hasError = function(name, fields) {
 						if (fields === undefined) {
@@ -226,7 +227,7 @@ angular.module('apiiSimFrontofficeApp').controller(
 									var errors = $scope.model.plantrip.response.PlanTripResponse.errors;
 									loop: for ( var i in errors) {
 										for ( var j in fields) {
-											if (errors[i].Field == fields[j]) {
+											if (errors[i].Field === fields[j]) {
 												result = true;
 												if (result) {
 													control.$dirty = true;
@@ -242,7 +243,7 @@ angular.module('apiiSimFrontofficeApp').controller(
 					};
 
 					$scope.errorMessage = function(name, fields) {
-						var result = "";
+						var result = '';
 						if (fields === undefined) {
 							fields = [ name ];
 						}
@@ -267,12 +268,12 @@ angular.module('apiiSimFrontofficeApp').controller(
 
 					function encodeURL() {
 						var param = {
-							"d_lng" : $rootScope.model.departure.lng,
-							"d_lat" : $rootScope.model.departure.lat,
-							"a_lng" : $rootScope.model.arrival.lng,
-							"a_lat" : $rootScope.model.arrival.lat,
-							"time" : new Date($scope.$storage.arrivalDepartureTime).getTime(),
-							"a_time" : $scope.$storage.arrivalDepartureTimeConstraint
+							'd_lng' : $rootScope.model.departure.lng,
+							'd_lat' : $rootScope.model.departure.lat,
+							'a_lng' : $rootScope.model.arrival.lng,
+							'a_lat' : $rootScope.model.arrival.lat,
+							'time' : new Date($scope.$storage.arrivalDepartureTime).getTime(),
+							'a_time' : $scope.$storage.arrivalDepartureTimeConstraint
 						};
 						// $log.info('[DSU] encode URL' +
 						// JSON.stringify(param));
@@ -283,18 +284,24 @@ angular.module('apiiSimFrontofficeApp').controller(
 						var param = $location.search();
 						// $log.info('[DSU] decode URL' +
 						// JSON.stringify(param));
-						if (param.d_lng != undefined)
+						if (param.d_lng) {
 							$rootScope.model.departure.lng = parseFloat(param.d_lng);
-						if (param.d_lat != undefined)
+						}
+						if (param.d_lat) {
 							$rootScope.model.departure.lat = parseFloat(param.d_lat);
-						if (param.a_lng != undefined)
+						}
+						if (param.a_lng) {
 							$rootScope.model.arrival.lng = parseFloat(param.a_lng);
-						if (param.a_lat != undefined)
+						}
+						if (param.a_lat) {
 							$rootScope.model.arrival.lat = parseFloat(param.a_lat);
-						if (param.time != undefined)
+						}
+						if (param.time) {
 							$scope.$storage.arrivalDepartureTime = new Date().setTime(param.time);
-						if (param.a_time != undefined)
+						}
+						if (param.a_time) {
 							$scope.$storage.arrivalDepartureTimeConstraint = param.a_time;
+						}
 					}
 
 					function createPlanTripCancellationRequest() {
@@ -337,19 +344,20 @@ angular.module('apiiSimFrontofficeApp').controller(
 							}
 						};
 
-						if ($scope.$storage.arrivalDepartureTimeConstraint == "false") {
+						var date, time;
+						if ($scope.$storage.arrivalDepartureTimeConstraint === 'false') {
 							delete message.PlanTripRequestType.ArrivalTime;
-							var date = moment($scope.$storage.arrivalDepartureDate).format('YYYY-MM-DD');
-							var time = moment($scope.$storage.arrivalDepartureTime).format('HH:mm:ss');
+							date = moment($scope.$storage.arrivalDepartureDate).format('YYYY-MM-DD');
+							time = moment($scope.$storage.arrivalDepartureTime).format('HH:mm:ss');
 							message.PlanTripRequestType.DepartureTime = date + 'T' + time;
 						} else {
 							delete message.PlanTripRequestType.DepartureTime;
-							var date = moment($scope.$storage.arrivalDepartureDate).format('YYYY-MM-DD');
-							var time = moment($scope.$storage.arrivalDepartureTime).format('HH:mm:ss');
+							date = moment($scope.$storage.arrivalDepartureDate).format('YYYY-MM-DD');
+							time = moment($scope.$storage.arrivalDepartureTime).format('HH:mm:ss');
 							message.PlanTripRequestType.ArrivalTime = date + 'T' + time;
 						}
 
-						for ( var i in $scope.$storage.departureAccessMode) {
+						for (var i in $scope.$storage.departureAccessMode) {
 							var value = {
 								SelfDriveMode : $scope.$storage.departureAccessMode[i],
 								TripPart : 'DEPARTURE'
@@ -357,9 +365,9 @@ angular.module('apiiSimFrontofficeApp').controller(
 							message.PlanTripRequestType.selfDriveConditions.push(value);
 						}
 
-						for ( var i in $scope.$storage.arrivalAccessMode) {
+						for (var j in $scope.$storage.arrivalAccessMode) {
 							var value = {
-								SelfDriveMode : $scope.$storage.arrivalAccessMode[i],
+								SelfDriveMode : $scope.$storage.arrivalAccessMode[j],
 								TripPart : 'ARRIVAL'
 							};
 							message.PlanTripRequestType.selfDriveConditions.push(value);
@@ -372,9 +380,9 @@ angular.module('apiiSimFrontofficeApp').controller(
 
 						Config.getConfig().then(function(result) {
 							$scope.config = result;
-						})
+						});
 						$scope.opened = false;
-						$scope.$storage = $sessionStorage.$default(DEFAULT);		
+						$scope.$storage = $sessionStorage.$default(DEFAULT);
 						$scope.$storage.arrivalDepartureDate = new Date($scope.$storage.arrivalDepartureDate);
 						$scope.$storage.arrivalDepartureTime = new Date($scope.$storage.arrivalDepartureTime);
 						decodeURL();

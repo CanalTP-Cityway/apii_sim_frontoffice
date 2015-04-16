@@ -1,4 +1,4 @@
-"use strict"
+'use strict';
 
 function Constant() {
 }
@@ -24,19 +24,19 @@ Constant.ACCESS_MODE = {
 };
 
 Constant.toIconClass = function(key) {
-	var result = "";
+	var result = '';
 	var mode = Constant.fromTransportMode(key);	
-	if(mode != null){
+	if(mode){
 		result = 'icon-' + mode.toLowerCase();
 	}else{
-		result = 'icon-' + key.toLowerCase()	
+		result = 'icon-' + key.toLowerCase();	
 	}
 	return result;
-}
+};
 
 Constant.toTransportMode = function(key) {
 	return Constant.TRANSPORT_MODE[key];
-}
+};
 
 Constant.fromTransportMode = function(value) {
 	var result = null;
@@ -45,18 +45,18 @@ Constant.fromTransportMode = function(value) {
 		var array = Constant.TRANSPORT_MODE[key];
 		for (var i = 0; i < array.length; i++) {
 			var item = array[i];
-			if (item == value) {
+			if (item === value) {
 				result = key;
 				break loop;
 			}
 		}
 	}
 	return result;
-}
+};
 
 Constant.toAccessMode = function(key) {
 	return Constant.ACCESS_MODE[key];
-}
+};
 
 Constant.fromAccessMode = function(value) {
 	var result = null;
@@ -65,11 +65,11 @@ Constant.fromAccessMode = function(value) {
 		var array = Constant.ACCESS_MODE[key];
 		for (var i = 0; i < array.length; i++) {
 			var item = array[i];
-			if (item == value) {
+			if (item === value) {
 				result = key;
 				break loop;
 			}
 		}
 	}
 	return result;
-}
+};

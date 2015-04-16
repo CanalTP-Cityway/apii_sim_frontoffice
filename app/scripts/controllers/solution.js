@@ -23,7 +23,7 @@ angular
 							};
 
 							$scope.getConnectionCounter = function(response) {
-								var result = "";
+								var result = '';
 								var count = 0;
 								if (response && response.body) {
 									var value = response.body.PlanTripNotificationResponseType.ComposedTrip.sections;
@@ -44,11 +44,11 @@ angular
 									}
 								}
 								return result;
-							}
+							};
 							
 							$scope.hasError = function() {
-								return ( $scope.model.responses.ending 
-								&& $scope.model.responses.ending.EndingSearch.NotificationsSent == 0);							
-							}
+								return ( $scope.model.responses.ending &&
+										$scope.model.responses.ending.EndingSearch.NotificationsSent == 0);							
+							};
 
 						} ]);

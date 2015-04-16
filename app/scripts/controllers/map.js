@@ -25,7 +25,7 @@ angular.module('apiiSimFrontofficeApp').controller(
 						});
 						$rootScope.model.departure.lng = parseFloat(lng);
 						$rootScope.model.departure.lat = parseFloat(lat);
-					}
+					};
 
 					$scope.setArrival = function(lng, lat) {
 						leafletData.getMap().then(function(map) {
@@ -33,21 +33,21 @@ angular.module('apiiSimFrontofficeApp').controller(
 						});
 						$rootScope.model.arrival.lng = parseFloat(lng);
 						$rootScope.model.arrival.lat = parseFloat(lat);
-					}
+					};
 
 					$scope.$watch('model.departure', function(value) {
-						if (value != undefined && $scope.markers['departure'] == undefined) {
+						if (value && !$scope.markers.departure) {
 
 							if (!(isNaN(value.lat) || isNaN(value.lng))) {
-								$scope.markers['departure'] = value;
+								$scope.markers.departure = value;
 							}
 						}
 					}, true);
 
 					$scope.$watch('model.arrival', function(value) {
-						if (value != undefined && $scope.markers['arrival'] == undefined) {
+						if (value && !$scope.markers.arrival) {
 							if (!(isNaN(value.lat) || isNaN(value.lng))) {
-								$scope.markers['arrival'] = value;
+								$scope.markers.arrival = value;
 							}
 						}
 					}, true);
@@ -71,7 +71,7 @@ angular.module('apiiSimFrontofficeApp').controller(
 											+ ')" translate >Arrival</a></div>' + '</div>';
 
 									var link = $compile(angular.element(template));
-									var content = link($scope)[0]
+									var content = link($scope)[0];
 									var popup = L.popup({
 										maxWidth : 83,
 										closeButton : false
@@ -84,49 +84,34 @@ angular.module('apiiSimFrontofficeApp').controller(
 
 					$scope.$on('leafletDirectiveMarker.click', function(event, data) {
 
-						leafletData.getMap().then(
-								function(map) {
-									var latlng = data.leafletEvent.latlng;
+						if (data.markerName === 'arrival' || data.markerName === 'departure') {
+							return;
+						}
 
-									var marker = $scope.markers[data.markerName];
-									if (marker) {
-									}
+						leafletData.getMap().then(function(map) {
+							var latlng = data.leafletEvent.latlng;
+							var marker = $scope.markers[data.markerName];
+							if (marker) {
 
-									var icon = Constant.toIconClass(marker.data.mode);
-									var arrival = moment.duration(marker.data.arrival).format('h [h] m [min]');
-									var departure = moment.duration(marker.data.departure).format('h [h] m [min]');
-									var header = "";
-									if (marker.data.mode != 'foot') {
-										var text = +' - ';
-										header = '<div class="popup-header">' + '<div>' + '<i class="' + icon + '"></i>'
-												+ '{{ "Line" | translate}}' + ' ' + marker.data.line + '</div>' + '<div>'
-												+ '{{ "Direction" | translate}}' + ' ' + marker.data.direction + '</div>'
-												+ '</div>';
-									}
+								var template = createMessage(marker);
 
-									var template = '<div id="popup">' + header + '<div><strong>' + marker.data.name
-											+ '</strong></div><div>' + marker.data.city_name + '</div>'
-											+ '<div class="arrival"><div><span class="glyphicon glyphicon-flag"></span>'
-											+ '{{ "Arrival" | translate}}' + ' ' + arrival + '</div></div>'
-											+ '<div class="departure"><div><span class="glyphicon glyphicon-flag"></span>'
-											+ '{{ "Departure" | translate}}' + ' ' + departure + '</div></div></div>';
-
-									var link = $compile(angular.element(template));
-									var content = link($scope)[0]
-									var popup = L.popup({
-										closeButton : false
-									});
-									popup.setContent(content);
-									popup.setLatLng(latlng);
-									popup.openOn(map);
+								var link = $compile(angular.element(template));
+								var content = link($scope)[0];
+								var popup = L.popup({
+									closeButton : false
 								});
+								popup.setContent(content);
+								popup.setLatLng(latlng);
+								popup.openOn(map);
+							}
+						});
 
 					});
 
-					$scope.$on('reset', function(event) {
+					$scope.$on('reset', function() {
 						Config.getConfig().then(function(result) {
 							leafletData.getMap().then(function(map) {
-								map.fitBounds(result.bounds)
+								map.fitBounds(result.bounds);
 							});
 						});
 					});
@@ -164,11 +149,11 @@ angular.module('apiiSimFrontofficeApp').controller(
 
 					function initialize() {
 
-						var url = "http://{s}.tile.osm.org/{z}/{x}/{y}.png";
+						var url = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png';
 						if ($rootScope.debug) {
 							// url =
-							// "http://{s}.www.toolserver.org/tiles/bw-mapnik/{z}/{x}/{y}.png";
-							url = "http://{s}.tile.osm.org/{z}/{x}/{y}.png";
+							// 'http://{s}.www.toolserver.org/tiles/bw-mapnik/{z}/{x}/{y}.png';
+							url = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png';
 						}
 
 						var local_icons = {
@@ -232,10 +217,6 @@ angular.module('apiiSimFrontofficeApp').controller(
 								path : {
 									enable : [ 'click' ],
 									logic : 'emit'
-								},
-								marker : {
-									enable : [ 'click' ],
-									logic : 'emit'
 								}
 							},
 							solution : {},
@@ -261,7 +242,7 @@ angular.module('apiiSimFrontofficeApp').controller(
 
 							map.setView(latlng, zoom - 1, {
 								animate : false
-							})
+							});
 
 						});
 					}
@@ -308,14 +289,14 @@ angular.module('apiiSimFrontofficeApp').controller(
 
 								// create section marker
 								departure = section.Departure;
-								if (arrival == null) {
+								if (arrival === null) {
 									arrival = departure;
 								}
 
 								var marker = createMarker(section, step, arrival, departure, 0, mode);
 								$scope.markers['m_' + i + '_0'] = marker;
 
-								if (i == (array.length - 1)) {
+								if (i === (array.length - 1)) {
 									marker = createMarker(section, step, section.Arrival, section.Arrival, 0, mode);
 									$scope.markers['m_' + i + '_1'] = marker;
 								}
@@ -324,11 +305,11 @@ angular.module('apiiSimFrontofficeApp').controller(
 									stroke_color : '#03f',
 									stroke_weight : 5,
 									opacity : 0.6,
-									title : (section.Line) ? section.Line.Number : "",
+									title : (section.Line) ? section.Line.Number : '',
 									latlngs : []
 								};
 
-								if (mode == 'foot') {
+								if (mode === 'foot') {
 									path.stroke_color = '#0f0';
 								}
 
@@ -338,13 +319,13 @@ angular.module('apiiSimFrontofficeApp').controller(
 								if (steps) {
 
 									for (var j = 0; j < steps.length; j++) {
-										var step = steps[j];
+										step = steps[j];
 
 										// create step marker
 										departure = step.Departure;
 
 										if (j > 0 && j < steps.length) {
-											var marker = createMarker(section, step, arrival, departure, 1, mode);
+											marker = createMarker(section, step, arrival, departure, 1, mode);
 											$scope.markers['m_' + i + '_' + j + '_0'] = marker;
 										}
 										arrival = step.Arrival;
@@ -352,7 +333,7 @@ angular.module('apiiSimFrontofficeApp').controller(
 										// create section path
 										var lng = step.Departure.TripStopPlace.Position.Longitude;
 										var lat = step.Departure.TripStopPlace.Position.Latitude;
-										if (lng != 0 && lat != 0) {
+										if (lng !== 0 && lat !== 0) {
 											path.latlngs.push({
 												lat : lat,
 												lng : lng
@@ -361,7 +342,7 @@ angular.module('apiiSimFrontofficeApp').controller(
 
 										lng = step.Arrival.TripStopPlace.Position.Longitude;
 										lat = step.Arrival.TripStopPlace.Position.Latitude;
-										if (lng != 0 && lat != 0) {
+										if (lng !== 0 && lat !== 0) {
 											path.latlngs.push({
 												lat : lat,
 												lng : lng
@@ -407,7 +388,7 @@ angular.module('apiiSimFrontofficeApp').controller(
 							type : 'div',
 							icon : {
 								type : 'div',
-								className : 'div-icon circle ' + ((type == 1) ? 'circle-1' : 'circle-0'),
+								className : 'div-icon circle ' + ((type === 1) ? 'circle-1' : 'circle-0'),
 								html : '<span class="' + Constant.toIconClass(mode) + '">',
 								iconSize : [ 20, 20 ]
 							},
@@ -415,11 +396,11 @@ angular.module('apiiSimFrontofficeApp').controller(
 							draggable : false,
 							data : {
 								name : name,
-								city_name : city_name || "",
+								city_name : city_name || '',
 								arrival : arrival.DateTime,
 								departure : departure.DateTime,
 								mode : mode,
-								line : line || "",
+								line : line || '',
 								direction : direction
 							}
 						};
@@ -427,10 +408,31 @@ angular.module('apiiSimFrontofficeApp').controller(
 						return marker;
 					}
 
+					function createMessage(marker) {
+						var icon = Constant.toIconClass(marker.data.mode);
+						var arrival = moment.duration(marker.data.arrival).format('h [h] m [min]');
+						var departure = moment.duration(marker.data.departure).format('h [h] m [min]');
+						var header = '';
+						if (marker.data.mode !== 'foot') {
+							header = '<div class="popup-header">' + '<div>' + '<i class="' + icon + '"></i>'
+									+ '{{ "Line" | translate}}' + ' ' + marker.data.line + '</div>' + '<div>'
+									+ '{{ "Direction" | translate}}' + ' ' + marker.data.direction + '</div>' + '</div>';
+						}
+
+						var result = '<div id="popup">' + header + '<div><strong>' + marker.data.name + '</strong></div><div>'
+								+ marker.data.city_name + '</div>'
+								+ '<div class="arrival"><div><span class="glyphicon glyphicon-flag"></span>'
+								+ '{{ "Arrival" | translate}}' + ' ' + arrival + '</div></div>'
+								+ '<div class="departure"><div><span class="glyphicon glyphicon-flag"></span>'
+								+ '{{ "Departure" | translate}}' + ' ' + departure + '</div></div></div>';
+
+						return result;
+					}
+
 					function clear() {
 						$scope.paths = {};
 						for ( var key in $scope.markers) {
-							if (key != "arrival" && key != "departure") {
+							if (key !== 'arrival' && key !== 'departure') {
 								delete $scope.markers[key];
 							}
 						}
