@@ -22,7 +22,7 @@
 					class="form-control" name="Departure"
 					placeholder="{{'EnterDeparture'| translate}} "
 					ng-model="$storage.departure"
-					typeahead="item.display_name for item in getAddresses($viewValue)"
+					typeahead="item.label for item in getAddresses($viewValue)"
 					typeahead-on-select="onSelectDeparture($item, $model, $label)" required
 				/>
 				<span class="input-group-btn">
@@ -43,7 +43,7 @@
 			<div class="input-group">
 				<input id="Arrival" type="text" class="form-control" name="Arrival"
 					placeholder="{{'EnterArrival'| translate}}" ng-model="$storage.arrival"
-					typeahead="item.display_name for item in getAddresses($viewValue)"
+					typeahead="item.label for item in getAddresses($viewValue)"
 					typeahead-on-select="onSelectArrival($item, $model, $label)" required
 				/>
 				<span class="input-group-btn">

@@ -37,9 +37,10 @@ angular.module('apiiSimFrontofficeApp').controller(
 
 					$scope.$watch('model.departure', function(value) {
 						if (value && !$scope.markers.departure) {
-
 							if (!(isNaN(value.lat) || isNaN(value.lng))) {
-								$scope.markers.departure = value;
+								if (!(value.lat == 0 && value.lng == 0)) {
+									$scope.markers.departure = value;
+								}
 							}
 						}
 					}, true);
@@ -47,7 +48,9 @@ angular.module('apiiSimFrontofficeApp').controller(
 					$scope.$watch('model.arrival', function(value) {
 						if (value && !$scope.markers.arrival) {
 							if (!(isNaN(value.lat) || isNaN(value.lng))) {
-								$scope.markers.arrival = value;
+								if (!(value.lat == 0 && value.lng == 0)) {
+									$scope.markers.arrival = value;
+								}
 							}
 						}
 					}, true);
