@@ -420,8 +420,10 @@ angular.module('apiiSimFrontofficeApp').controller(
 						var header = '';
 						if (marker.data.mode !== 'foot') {
 							header = '<div class="popup-header">' + '<div>' + '<i class="' + icon + '"></i>'
-									+ '{{ "Line" | translate}}' + ' ' + marker.data.line + '</div>' + '<div>'
-									+ '{{ "Direction" | translate}}' + ' ' + marker.data.direction + '</div>' + '</div>';
+									+ '{{ "Line" | translate}}' + ' ' + marker.data.line + '</div>';
+							header += (marker.data.direction) ? '<div>' + '{{ "Direction" | translate}}' + ' '
+									+ marker.data.direction + '</div>' : '';
+							header += '</div>';
 						}
 
 						var result = '<div id="popup">' + header + '<div><strong>' + marker.data.name + '</strong></div><div>'
